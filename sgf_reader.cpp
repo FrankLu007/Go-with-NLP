@@ -6,7 +6,7 @@
 #include <queue>
 
 void error_message(const char * str) {std::fprintf(stderr, "\033[1;31mError\033[0m: %s\n", str); exit(-1);}
-bool valid_postion(const unsigned position){return position && position < 361;}
+bool valid_postion(const unsigned position) {return position >= 0 && position < 361;}
 char * decode_pos(const unsigned position) // position on the real board, can't be used in sgf
 {
 	static char ret[3];
@@ -23,7 +23,7 @@ char * decode_pos(const unsigned position) // position on the real board, can't 
 	}
 	return ret;
 }
-unsigned encode_pos(const char * position) {return (*(position+1) - 'A') * 19 + * position - 'A';} // from the sgf
+unsigned encode_pos(const char * position) {return (position[1] - 'a') * 19 + position[0] - 'a';} // from the sgf
 class MOVE
 {
 	char board[361], * comment;
@@ -32,14 +32,14 @@ public:
 	unsigned step;
 	MOVE * last;
 	std::vector<MOVE *> child;
-	MOVE():comment(NULL), step(0), color(-1), position(383), last(NULL)
+	MOVE():comment(NULL), step(0), color(-1), position(361), last(NULL)
 	{
-		std::memset(board, 0, 381);
+		std::memset(board, 0, 361);
 		child.clear();
 	}
 	MOVE(const unsigned _step, const unsigned _color, const unsigned _position, const char * _board): step(_step), color(_color), position(_position), comment(NULL)
 	{
-		std::memcpy(board, _board, 381);
+		std::memcpy(board, _board, 361);
 		child.clear();
 		put_stone();
 	}
@@ -54,15 +54,15 @@ public:
 	void put_stone()
 	{
 		board[position] = color;
-		if(valid_postion(position - 1) && board[position] == -color) get_stone(position - 1);
-		if(valid_postion(position + 1) && board[position] == -color) get_stone(position + 1);
-		if(valid_postion(position - 19) && board[position] == -color) get_stone(position - 19);
-		if(valid_postion(position + 19) && board[position] == -color) get_stone(position + 19);
+		if(position % 19 && valid_postion(position - 1) && board[position - 1] == -color) get_stone(position - 1);
+		if(position % 19 != 18 && valid_postion(position + 1) && board[position + 1] == -color) get_stone(position + 1);
+		if(position / 19 && valid_postion(position - 19) && board[position - 19] == -color) get_stone(position - 19);
+		if(position / 19 != 18 && valid_postion(position + 19) && board[position + 19] == -color) get_stone(position + 19);
 	}
 	void get_stone(const unsigned _position)
 	{
-		static std::unordered_set <unsigned char> pos;
-		static std::queue <unsigned char> que;
+		static std::unordered_set <unsigned> pos;
+		static std::queue <unsigned> que;
 		bool alive = 0;
 
 		pos.clear();
@@ -72,9 +72,9 @@ public:
 
 		while(que.size())
 		{
-			unsigned char current = que.front();
+			unsigned current = que.front();
 			que.pop();
-			if(valid_postion(current + 1))
+			if(current % 19 != 18 && valid_postion(current + 1))
 			{
 				if(!board[current + 1]) {alive = 1; break;}
 				if(board[current + 1] == board[current])
@@ -86,7 +86,7 @@ public:
 					}
 				}
 			}
-			if(valid_postion(current - 1))
+			if(current % 19 && valid_postion(current - 1))
 			{
 				if(!board[current - 1]) {alive = 1; break;}
 				if(board[current - 1] == board[current])
@@ -98,7 +98,7 @@ public:
 					}
 				}
 			}
-			if(valid_postion(current + 19))
+			if(current / 19 != 18 && valid_postion(current + 19))
 			{
 				if(!board[current + 19]) {alive = 1; break;}
 				if(board[current + 19] == board[current])
@@ -110,7 +110,7 @@ public:
 					}
 				}
 			}
-			if(valid_postion(current - 19))
+			if(current / 19 && valid_postion(current - 19))
 			{
 				if(!board[current - 19]) {alive = 1; break;}
 				if(board[current - 19] == board[current])
@@ -127,32 +127,36 @@ public:
 		for(auto dead_stone : pos) board[dead_stone] = 0;
 	}
 	void display()
-	{
-		const char RED[] = "\033[1;31;2;43m", WHITE[] = "\033[1;37;2;43m", BLACK[] = "\033[1;30;2;43m";
-		
+	{	
+		std::printf("\033[43m%41s\033[0m\n\033[43m ", "");
 		for(unsigned i = 0 ; i < 361 ; i++)
 		{
-			if(i && !(i % 19)) std::printf(" \033[0m\n");
-			if(i == position) std::printf("\033[1;31;2;43m(");
-			else if(i - 1 != position)std::printf("\033[2;43m ");
+			if(i && !(i % 19)) 
+			{
+				if(i - 1 != position) std::printf("\033[2;43m \033[0m");
+				std::printf("\033[2;43m \033[0m\n\033[2;43m ");
+			}
+			if(i == position) std::printf("\033[1;31;2;43m(\033[0m");
+			else if(i - 1 != position || !(i % 19)) std::printf("\033[2;43m \033[0m");
 			switch(board[i])
 			{
 				case 1:
-					std::printf("\033[1;30;2;43m0");
+					std::printf("\033[2;30;2;43m0\033[0m");
 					break;
 				case -1:
-					std::printf("\033[1;37;2;43m0");
+					std::printf("\033[1;37;2;43m0\033[0m");
 					break;
 				case 0:
-					std::printf("\033[1;30;2;43m.");
+					std::printf("\033[1;30;2;43m.\033[0m");
 					break;
 				default:
 					error_message("wrong board.");
 			}
-			if(i == position) std::printf("\033[1;31;2;43m)");
+			if(i == position) std::printf("\033[1;31;2;43m)\033[0m");
 		}
-		std::printf(" \033[0m\n\033[43m%39s\033[0m\n", "");
-		std::printf("The last step is %s at %s\n", color == 1 ? "BLACK" : "WHITE", decode_pos(position));
+		std::printf("\033[2;43m  \033[0m\n\033[43m%41s\033[0m\n", "");
+		std::printf("The %uth step is %s at %s\n", step, color == 1 ? "BLACK" : "WHITE", decode_pos(position));
+		if(comment) std::printf("Comment: %s\n\n", comment);
 	}
 	void clear()
 	{
@@ -165,20 +169,23 @@ void build(char * sgf_raw_data, const char * end, MOVE * current)
 {
 	unsigned position;
 	char * comment = NULL;
-	while(std::strncmp(sgf_raw_data, ";B[", 3) && std::strncmp(sgf_raw_data, ";W[", 3) && std::strncmp(sgf_raw_data, ";C[", 3) && sgf_raw_data < end) 
+	while(sgf_raw_data < end && std::strncmp(sgf_raw_data, ";B[", 3) && std::strncmp(sgf_raw_data, ";W[", 3)) 
 	{
-		if(* sgf_raw_data == ')' && * (sgf_raw_data - 1) != '(') return;
+		if(* sgf_raw_data == ')') return;
 		sgf_raw_data++;
 	}
-	if(sgf_raw_data == end) return;
-	if(!std::strncmp(sgf_raw_data, ";B[", 3) || !std::strncmp(sgf_raw_data, ";W[", 3)) position = encode_pos(sgf_raw_data);
+	if(sgf_raw_data >= end) return;
+	position = encode_pos(sgf_raw_data + 3);
 	sgf_raw_data += 6;
-	if(sgf_raw_data == end) return;
-	while(std::strncmp(sgf_raw_data, ";B[", 3) && std::strncmp(sgf_raw_data, ";W[", 3) && std::strncmp(sgf_raw_data, ";C[", 3) && sgf_raw_data < end) sgf_raw_data++;
-	if(sgf_raw_data == end) return;
-	if(!std::strncmp(sgf_raw_data, ";C[", 3)) 
+	while(sgf_raw_data < end && std::strncmp(sgf_raw_data, ";B[", 3) && std::strncmp(sgf_raw_data, ";W[", 3) && std::strncmp(sgf_raw_data, "C[", 2))
 	{
-		comment = sgf_raw_data + 3;
+		if(* sgf_raw_data == ')') return;
+		sgf_raw_data++;
+	}
+	if(sgf_raw_data >= end) return;
+	if(!std::strncmp(sgf_raw_data, "C[", 2)) 
+	{
+		comment = sgf_raw_data += 2;
 		while(* sgf_raw_data != ']') sgf_raw_data++;
 		* sgf_raw_data = 0;
 		sgf_raw_data++;
@@ -197,6 +204,7 @@ void load(const char * file_name)
 	unsigned len = std::strlen(sgf_raw_data), index;
 	board_root = MOVE();
 
+	clear();
 	for(index = 0 ; index < len ; index++) if(!std::strncmp(sgf_raw_data + index, ";B[", 3)) break;
 	build(sgf_raw_data + index, sgf_raw_data + len, & board_root);
 }
@@ -208,19 +216,19 @@ int main(const int argc, const char ** argv)
 
 	static char command[100];
 
-	while(std::scanf("%s", command))
+	while(std::printf("sgf_reader > ") && std::scanf("%s", command))
 	{
-		if(!std::strcmp(command, "load") || !std::strcmp(command, "L"))
+		if(!std::strcmp(command, "load") || !std::strcmp(command, "l"))
 		{
 			std::scanf("%s", command);
 			load(command);
 		}
-		else if(!std::strcmp(command, "next") || !std::strcmp(command, "N"))
+		else if(!std::strcmp(command, "next") || !std::strcmp(command, "n"))
 		{
 			if(current->child.size()) current = current->child[0];
 			current->display();
 		}
-		else if(!std::strcmp(command, "jump") || !std::strcmp(command, "J"))
+		else if(!std::strcmp(command, "jump") || !std::strcmp(command, "j"))
 		{
 			unsigned step;
 			std::scanf("%u", & step);
@@ -230,6 +238,22 @@ int main(const int argc, const char ** argv)
 				while(current->last && current->step != step) current = current->last;
 			current->display();
 		}
+		else if(!std::strcmp(command, "back") || !std::strcmp(command, "b"))
+		{
+			if(current->last) current = current->last;
+			current->display();
+		}
+		else if(!std::strcmp(command, "display") || !std::strcmp(command, "d")) current->display();
+		else if(!std::strcmp(command, "help") || !std::strcmp(command, "h"))
+		{
+			std::printf("\tload/l [sgf file] : load the file.\n"
+						"\tnext/n : display the next step.\n"
+						"\tback/b : go back to the last step.\n"
+						"\tjump/j [#step] : jump the the specific step.\n"
+						"\tdisplay/d : display the current board.\n"
+						"\tquit/q : exit.\n");
+		}
+		else if(!std::strcmp(command, "quit") || !std::strcmp(command, "q")) break;
 	}
 	return 0;
 }
