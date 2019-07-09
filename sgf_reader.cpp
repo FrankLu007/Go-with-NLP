@@ -4,6 +4,8 @@
 #include <vector>
 #include <unordered_set>
 #include <queue>
+#include <dirent.h>
+#include <sys/stat.h>
 
 void error_message(const char * str) {std::fprintf(stderr, "\033[1;31mError\033[0m: %s\n", str); exit(-1);}
 bool valid_postion(const unsigned position) {return position >= 0 && position < 361;}
@@ -26,9 +28,10 @@ char * decode_pos(const unsigned position) // position on the real board, can't 
 unsigned encode_pos(const char * position) {return (position[1] - 'a') * 19 + position[0] - 'a';} // from the sgf
 class MOVE
 {
-	char board[361], * comment;
+	char board[361];
 	unsigned color, position;
 public:
+	char * comment;
 	unsigned step;
 	MOVE * last;
 	std::vector<MOVE *> child;
@@ -48,6 +51,8 @@ public:
 		MOVE * next = new MOVE(step + 1, -color, position, board);
 		next->last = this;
 		next->comment = _comment;
+		if(_comment) next->arrange_comment();
+		if(next->comment && !std::strlen(next->comment)) next->comment = NULL;	
 		child.push_back(next);
 		return next;
 	}
@@ -156,12 +161,27 @@ public:
 		}
 		std::printf("\033[2;43m  \033[0m\n\033[43m%41s\033[0m\n", "");
 		std::printf("The %uth step is %s at %s\n", step, color == 1 ? "BLACK" : "WHITE", decode_pos(position));
-		if(comment) std::printf("Comment: %s\n\n", comment);
+		if(comment) {std::printf("Comment: %s\n\n", comment);  std::printf("\n");}
 	}
 	void clear()
 	{
 		for(auto child_pointer : child) child_pointer->clear();
 		delete this;
+	}
+	void print_board(FILE * fp)
+	{
+		for(unsigned i = 0 ; i < 361 ; i++) std::fprintf(fp, "%d ", i == position ? board[i] * 2 : board[i]);
+		std::fprintf(fp,"\n");
+	}
+	void arrange_comment()
+	{
+		unsigned len = std::strlen(comment), real = 0;
+		for(unsigned i = 0 ; i < len ; i++)
+		{
+			if(comment[i] == ' ' || comment[i] == '\n' || comment[i] == '\r') continue;
+			comment[real++] = comment[i];
+		}
+		comment[real] = 0;
 	}
 }board_root, * current = & board_root;
 void clear() {for(auto child : board_root.child) child->clear();}
@@ -183,7 +203,7 @@ void build(char * sgf_raw_data, const char * end, MOVE * current)
 		sgf_raw_data++;
 	}
 	if(sgf_raw_data >= end) return;
-	if(!std::strncmp(sgf_raw_data, "C[", 2)) 
+	if(!std::strncmp(sgf_raw_data, "C[", 2) && std::strncmp(sgf_raw_data, "C[]", 3)) 
 	{
 		comment = sgf_raw_data += 2;
 		while(* sgf_raw_data != ']') sgf_raw_data++;
@@ -207,6 +227,7 @@ void load(const char * file_name)
 	clear();
 	for(index = 0 ; index < len ; index++) if(!std::strncmp(sgf_raw_data + index, ";B[", 3)) break;
 	build(sgf_raw_data + index, sgf_raw_data + len, & board_root);
+	current = & board_root;
 }
 
 int main(const int argc, const char ** argv)
@@ -246,14 +267,38 @@ int main(const int argc, const char ** argv)
 		else if(!std::strcmp(command, "display") || !std::strcmp(command, "d")) current->display();
 		else if(!std::strcmp(command, "help") || !std::strcmp(command, "h"))
 		{
-			std::printf("\tload/l [sgf file] : load the file.\n"
-						"\tnext/n : display the next step.\n"
-						"\tback/b : go back to the last step.\n"
-						"\tjump/j [#step] : jump the the specific step.\n"
-						"\tdisplay/d : display the current board.\n"
-						"\tquit/q : exit.\n");
+			std::printf("\tload/l    [sgf file] : load the file.\n"
+						"\tnext/n               : display the next step.\n"
+						"\tback/b               : go back to the last step.\n"
+						"\tjump/j    #step      : jump the the specific step.\n"
+						"\tdisplay/d            : display the current board.\n"
+						"\tquit/q               : exit.\n");
 		}
 		else if(!std::strcmp(command, "quit") || !std::strcmp(command, "q")) break;
+		else if(!std::strcmp(command, "collect_training_data"))
+		{
+			DIR * dir = opendir("sgf/");
+			FILE * board = std::fopen("board.txt", "w"), * comment = std::fopen("comment.txt", "w");
+			static char path[100];
+			struct dirent * sgf;
+			while(sgf = readdir(dir))
+			{
+				if(sgf->d_name[0] == '.') continue;
+				std::sprintf(path, "sgf/%s", sgf->d_name);
+				load(path);
+				while(current->child.size())
+				{
+					if(current->comment)
+					{
+						current->print_board(board);
+						std::fprintf(comment,"%s\n", current->comment);
+					}
+					current = current->child[0];
+				}
+			}
+			std::fclose(board);
+			std::fclose(comment);
+		}
 	}
 	return 0;
 }

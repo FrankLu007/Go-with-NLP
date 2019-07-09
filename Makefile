@@ -1,4 +1,4 @@
 all:
 	g++ -g -o sgf_reader -O3 sgf_reader.cpp
 clean:
-	rm sgf_reader
+	rm sgf_reader board.txt comment.txt
