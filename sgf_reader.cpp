@@ -275,10 +275,10 @@ int main(const int argc, const char ** argv)
 						"\tquit/q               : exit.\n");
 		}
 		else if(!std::strcmp(command, "quit") || !std::strcmp(command, "q")) break;
-		else if(!std::strcmp(command, "collect_training_data"))
+		else if(!std::strcmp(command, "collect"))
 		{
 			DIR * dir = opendir("sgf/");
-			FILE * board = std::fopen("board.txt", "w"), * comment = std::fopen("comment.txt", "w");
+			FILE * data = std::fopen("data.txt", "w");
 			static char path[100];
 			struct dirent * sgf;
 			while(sgf = readdir(dir))
@@ -290,14 +290,13 @@ int main(const int argc, const char ** argv)
 				{
 					if(current->comment)
 					{
-						current->print_board(board);
-						std::fprintf(comment,"%s\n", current->comment);
+						std::fprintf(data,"%s\n", current->comment);
+						current->print_board(data);
 					}
 					current = current->child[0];
 				}
 			}
-			std::fclose(board);
-			std::fclose(comment);
+			std::fclose(data);
 		}
 	}
 	return 0;
