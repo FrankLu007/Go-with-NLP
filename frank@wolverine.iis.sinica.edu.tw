@@ -44,7 +44,7 @@ class NET(nn.module):
 			return go_cnn_layer[num_cnn - 1](x)
 		return go_cnn_layer[num_cnn - 2](relu(go_cnn_layer[num_cnn - 1](x)))
 
-	def relu(x):
+	def relu(x)
 		num_relu += 1
 		return go_relu_layer[num_relu - 1](x)
 
