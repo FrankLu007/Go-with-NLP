@@ -1,26 +1,32 @@
 import torch
-from torch import *
+import torch.nn as nn
 
 
 CONNECT_LENGTH = 361
 EPOCH_NUM = 100
 
 def get_data(filename):
-	self.dataset = []
+	dataset = []
 
-	file = f(filename, 'r')
-	chess = file.readline()
-	word = file.readline()
-	while chess:
-		dataset.append([chess, word])
-		chess = file.readline()
-		word = file.readline()
-	fp.close()
+	with open('data.txt', 'r', errors='ignore') as file:
+		while True:
+			word = file.readline()
+			if word:
+				tmp = file.readline().split(' ')
+				tmp.pop(-1)
+				tmp = torch.IntTensor([int(i) for i in tmp]).view(19, 19)
+				print(tmp)
+				break
+				#chess = torch().view(19, 19)
+				dataset.append([word, chess])
+			else :
+				break
+		file.close()
 
 	return dataset
 
 
-class NET(nn.module):
+class NET(nn.Module):
 	def __init__(self):
 		super(NET, self)
 		#nn.Conv2d(batch size, #filter, kernel size, stride, padding)
@@ -69,8 +75,9 @@ class NET(nn.module):
 		nlp_lstm.zero_grid()
 
 		return output
+
 dataset = get_data('data.txt')
-print dataset
+print('Size of data: ', len(dataset))
 # model = NET()
 # cost = nn.CrossEntropyLoss()
 # optimzer = optim.Adam(model.parameters())

@@ -14,9 +14,9 @@ elif [ $# -eq 3 ]; then
 	echo "" | ssh-keygen > /dev/null
 	printf "\nTransmit the public key to the target ... "
 	export SSHPASS=$3
-	sshpass -e ssh -o StrictHostKeyChecking=no $2@$1 'mkdir .ssh'
-	sshpass -e ssh $2@$1 'chmod 700 .ssh'
-	sshpass -e ssh $2@$1 'echo "" > .ssh/authorized_keys'
+	#sshpass -e ssh -o StrictHostKeyChecking=no $2@$1 'mkdir .ssh'
+	#sshpass -e ssh $2@$1 'chmod 700 .ssh'
+	#sshpass -e ssh $2@$1 'echo "" > .ssh/authorized_keys'
 	sshpass -e scp ~/.ssh/id_rsa.pub $2@$1:~/.ssh/
 	sshpass -e ssh $2@$1 'cat .ssh/id_rsa.pub >> .ssh/authorized_keys'
 else
