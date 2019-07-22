@@ -26,6 +26,19 @@ char * decode_pos(const unsigned position) // position on the real board, can't 
 	}
 	return ret;
 }
+void unicode_handler(char * olds, char * news, unsigned & o_index, unsigned & n_index)
+{
+	unsigned offset = 0;
+	if(!(olds[o_index] & 0x80)) offset = 1;
+	else if(!(olds[o_index] & 0x20)) offset = 2;
+	else if(!(olds[o_index] & 0x10)) offset = 3;
+	else if(!(olds[o_index] & 0x08)) offset = 4;
+	else if(!(olds[o_index] & 0x04)) offset = 5;
+	else if(!(olds[o_index] & 0x02)) offset = 6;
+	else error_message("wrong unicode.");
+
+	while(offset--) news[n_index++] = olds[o_index++];
+}
 unsigned encode_pos(const char * position) {return (position[1] - 'a') * 19 + position[0] - 'a';} // from the sgf
 class MOVE
 {
@@ -167,6 +180,7 @@ public:
 	void clear()
 	{
 		for(auto child_pointer : child) child_pointer->clear();
+		if(comment) delete comment;
 		delete this;
 	}
 	void print_board(FILE * fp)
@@ -176,11 +190,14 @@ public:
 	}
 	void arrange_comment()
 	{
-		unsigned len = std::strlen(comment), real = 0;
-		for(unsigned i = 0 ; i < len ; i++)
+		char * tmp = comment;
+		comment = new char[10000];
+		unsigned len = std::strlen(tmp), real = 0;
+		for(unsigned i = 0 ; i < len ;)
 		{
-			if(comment[i] == ' ' || comment[i] == '\n' || comment[i] == '\r') continue;
-			comment[real++] = comment[i];
+			if(tmp[i] == ' ' || tmp[i] == '\n' || tmp[i] == '\r' || tmp[i] == '\t' || tmp[i] == '\\') {i++; continue;}
+			unicode_handler(tmp, comment, i, real);
+			comment[real++] = ' ';
 		}
 		comment[real] = 0;
 	}
@@ -293,19 +310,7 @@ int main(const int argc, const char ** argv)
 					if(current->comment)
 					{
 						current->print_board(board);
-						char tmp[4];
-						tmp[3] = 0;
-						for(unsigned i = 0 ; i < std::strlen(current->comment) ; i++)
-						{
-							if(current->comment[i] & 0x80)
-							{
-								std::memcpy(tmp, current->comment + i, 3);
-								std::fprintf(comment, "%s ", tmp);
-								i += 2;
-							}
-							else std::fprintf(comment, "%c ", current->comment[i]);
-						}
-						std::fprintf(comment, "\n");
+						std::fprintf(comment, "%s\n", current->comment);
 						
 					}
 					current = current->child[0];
@@ -316,54 +321,25 @@ int main(const int argc, const char ** argv)
 		}
 		else if(!std::strcmp(command, "embed"))
 		{
-			unsigned sz, max_length = 0;
-			
-			static char path[200];
-			struct dirent * sgf;
-			DIR * dir = opendir("sgf/");
-			FILE * data = std::fopen("tmp.txt", "w");
-
-			while(sgf = readdir(dir))
+			if(access("comment.txt", F_OK ) == -1)
 			{
-				if(sgf->d_name[0] == '.') continue;
-				std::sprintf(path, "sgf/%s", sgf->d_name);
-				load(path);
-				while(current->child.size())
-				{
-					if(current->comment)
-					{
-						char tmp[4];
-						tmp[3] = 0;
-						sz = std::strlen(current->comment);
-						for(unsigned i = 0 ; i < std::strlen(current->comment) ; i++)
-						{
-							if(current->comment[i] & 0x80)
-							{
-								std::memcpy(tmp, current->comment + i, 3);
-								std::fprintf(data, "%s ", tmp);
-								i += 2;
-								sz -= 2;
-							}
-							else std::fprintf(data, "%c ", current->comment[i]);
-						}
-						std::fprintf(data, "\n");
-						max_length = std::max(sz, max_length);
-					}
-					current = current->child[0];
-				}
+				std::printf("Please commit \"collect\" first.\n");
+				continue;
 			}
-			std::fclose(data);
+			unsigned sz;
+			
+			static char path[200], input[100000];
+			
 			std::printf("Input the embedding size (less than 1000): ");
 			std::scanf("%u", &sz);
 			std::sprintf(path, "embeddings/character_embedding_%uD.txt", sz);
 			if(access(path, F_OK ) == -1)
 			{
-				std::sprintf(path, "embeddings/word2vec/trunk/word2vec -train tmp.txt -output embeddings/character_embedding_%uD.txt -size %u -iter 100 -threads 6 -min-count 2\n", sz, sz);
+				std::sprintf(path, "embeddings/word2vec/trunk/word2vec -train comment.txt -output embeddings/character_embedding_%uD.txt -size %u -iter 100 -threads 6 -min-count 0\n", sz, sz);
 				system(path);
 				std::printf("\n");
 			}
 			else std::printf("File exists.\n");
-			std::remove("tmp.txt");
 		}
 	}
 	return 0;

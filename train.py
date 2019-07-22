@@ -1,6 +1,5 @@
-# import torch
-# import torch.nn as nn
-
+import torch
+import torch.nn as nn
 
 CONNECT_LENGTH = 361
 EPOCH_NUM = 100
@@ -8,11 +7,13 @@ converter = {} # character -> vector
 
 def get_data(filename, embedding = []):
 	dataset = []
+	error = []
+	zero = zeros(361)
 	global converter
 
 	# build converter
 	if embedding:
-		with open(embedding, 'r', errors='ignore') as file:
+		with open(embedding, 'r', errors = 'ignore', encoding = 'UTF-8') as file:
 			file.readline() # number and dimension
 			while True:
 				tmp = file.readline().split(' ')
@@ -23,12 +24,15 @@ def get_data(filename, embedding = []):
 						break
 					tmp.pop(-1) # pop '\n'
 					if character in converter:
-						print('Error : ', character)
-						print([ord(c) for c in character])
-					converter[character] = tmp
-
+						error.append(character)
+					else : 
+						tmp = torch.FloatTensor([float(i) for i in tmp])
+						converter[character] = tmp
+		if len(error):
+			print(len(error), ' error(s) in embeddings : ', error)
+	error = []
 	# build the dataset
-	with open(filename, 'r', errors='ignore') as file:
+	with open(filename, 'r', errors = 'ignore') as file:
 		while True:
 			tmp = file.readline().split(' ')
 			tmp.pop(-1) # pop '\n'
@@ -38,14 +42,18 @@ def get_data(filename, embedding = []):
 					for i in tmp :
 						if i == '\t' or i == '\n' :
 							continue
-						sentence.append(converter[i])
+						if i not in converter:
+							error.append(character)
+						else :
+							sentence.append(converter[i])
 					dataset.append(sentence)
-				else : #chess
-					#tmp = torch.IntTensor([int(i) for i in tmp]).view(19, 19)
-					#chess = torch().view(19, 19)
+				else : # Go chess
+					tmp = torch.IntTensor([int(i) for i in tmp]).view(19, 19)
 					dataset.append(tmp)
 			else :
 				break
+		if len(error):
+			print(len(error), ' error(s) in converter : ', error)
 		file.close()
 
 	return dataset
