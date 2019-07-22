@@ -5,6 +5,7 @@
 #include <unordered_set>
 #include <queue>
 #include <dirent.h>
+#include <unistd.h>
 #include <sys/stat.h>
 
 void error_message(const char * str) {std::fprintf(stderr, "\033[1;31mError\033[0m: %s\n", str); exit(-1);}
@@ -278,9 +279,10 @@ int main(const int argc, const char ** argv)
 		else if(!std::strcmp(command, "collect"))
 		{
 			DIR * dir = opendir("sgf/");
-			FILE * data = std::fopen("data.txt", "w");
+			FILE * board = std::fopen("board.txt", "w"), * comment = std::fopen("comment.txt", "w");
 			static char path[100];
 			struct dirent * sgf;
+
 			while(sgf = readdir(dir))
 			{
 				if(sgf->d_name[0] == '.') continue;
@@ -290,13 +292,78 @@ int main(const int argc, const char ** argv)
 				{
 					if(current->comment)
 					{
-						std::fprintf(data,"%s\n", current->comment);
-						current->print_board(data);
+						current->print_board(board);
+						char tmp[4];
+						tmp[3] = 0;
+						for(unsigned i = 0 ; i < std::strlen(current->comment) ; i++)
+						{
+							if(current->comment[i] & 0x80)
+							{
+								std::memcpy(tmp, current->comment + i, 3);
+								std::fprintf(comment, "%s ", tmp);
+								i += 2;
+							}
+							else std::fprintf(comment, "%c ", current->comment[i]);
+						}
+						std::fprintf(comment, "\n");
+						
+					}
+					current = current->child[0];
+				}
+			}
+			std::fclose(board);
+			std::fclose(comment);
+		}
+		else if(!std::strcmp(command, "embed"))
+		{
+			unsigned sz, max_length = 0;
+			
+			static char path[200];
+			struct dirent * sgf;
+			DIR * dir = opendir("sgf/");
+			FILE * data = std::fopen("tmp.txt", "w");
+
+			while(sgf = readdir(dir))
+			{
+				if(sgf->d_name[0] == '.') continue;
+				std::sprintf(path, "sgf/%s", sgf->d_name);
+				load(path);
+				while(current->child.size())
+				{
+					if(current->comment)
+					{
+						char tmp[4];
+						tmp[3] = 0;
+						sz = std::strlen(current->comment);
+						for(unsigned i = 0 ; i < std::strlen(current->comment) ; i++)
+						{
+							if(current->comment[i] & 0x80)
+							{
+								std::memcpy(tmp, current->comment + i, 3);
+								std::fprintf(data, "%s ", tmp);
+								i += 2;
+								sz -= 2;
+							}
+							else std::fprintf(data, "%c ", current->comment[i]);
+						}
+						std::fprintf(data, "\n");
+						max_length = std::max(sz, max_length);
 					}
 					current = current->child[0];
 				}
 			}
 			std::fclose(data);
+			std::printf("Input the embedding size (less than 1000): ");
+			std::scanf("%u", &sz);
+			std::sprintf(path, "embeddings/character_embedding_%uD.txt", sz);
+			if(access(path, F_OK ) == -1)
+			{
+				std::sprintf(path, "embeddings/word2vec/trunk/word2vec -train tmp.txt -output embeddings/character_embedding_%uD.txt -size %u -iter 100 -threads 6 -min-count 2\n", sz, sz);
+				system(path);
+				std::printf("\n");
+			}
+			else std::printf("File exists.\n");
+			std::remove("tmp.txt");
 		}
 	}
 	return 0;
