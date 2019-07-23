@@ -1,14 +1,18 @@
+# embedding : https://code.google.com/archive/p/word2vec/
+import os
 import torch
 import torch.nn as nn
+import torch.optim as optim
 
 CONNECT_LENGTH = 361
 EPOCH_NUM = 100
 converter = {} # character -> vector
 
+
 def get_data(filename, embedding = []):
 	dataset = []
 	error = []
-	zero = zeros(361)
+	zero = torch.zeros(1, 361)
 	global converter
 
 	# build converter
@@ -38,17 +42,18 @@ def get_data(filename, embedding = []):
 			tmp.pop(-1) # pop '\n'
 			if tmp:
 				if embedding : # comment
-					sentence = []
+					sentence = torch.tensor([])
 					for i in tmp :
 						if i == '\t' or i == '\n' :
 							continue
 						if i not in converter:
 							error.append(character)
 						else :
-							sentence.append(converter[i])
+							sentence = torch.cat((sentence, converter[i].view(1, 361)), dim = 0)
+					sentence = torch.cat((sentence, zero), dim = 0)
 					dataset.append(sentence)
 				else : # Go chess
-					tmp = torch.IntTensor([int(i) for i in tmp]).view(19, 19)
+					tmp = torch.FloatTensor([float(i) for i in tmp]).view(19, 19)
 					dataset.append(tmp)
 			else :
 				break
@@ -58,56 +63,59 @@ def get_data(filename, embedding = []):
 
 	return dataset
 
+class NET(nn.Module):
+	def __init__(self):
+		super(NET, self).__init__()
+		#nn.Conv2d(batch size, #filter, kernel size, stride, padding)
+		#nn.BatchNorm2d(batch size)
+		self.go_cnn_layer = []
+		self.go_relu_layer = []
+		self.go_scalar = []	
+		self.go_linear_layer = nn.Linear(361, CONNECT_LENGTH)
+		self.nlp_lstm = nn.LSTM(CONNECT_LENGTH, CONNECT_LENGTH, bidirectional = False)
+		self.num_cnn = 0
+		self.num_relu = 0
+		for i in range(8):
+			self.go_cnn_layer.append(nn.Sequential(nn.Conv2d(1, 1, 3, 1, 1), 
+									nn.BatchNorm2d(1)))
+			self.go_scalar.append(nn.Parameter(torch.FloatTensor(1).fill_(1.0), requires_grad = True))
+			self.go_relu_layer.append(nn.ReLU())
+	def cnn(self, x, layer = 1):
+		self.num_cnn += layer
+		if layer == 1:
+			return self.go_cnn_layer[self.num_cnn - 1](x) * self.go_scalar[self.num_cnn - 1]
+		return self.go_cnn_layer[self.num_cnn - 1](self.relu(self.go_cnn_layer[self.num_cnn - 2](x) * self.go_scalar[self.num_cnn -2]))
 
-# class NET(nn.Module):
-# 	def __init__(self):
-# 		super(NET, self)
-# 		#nn.Conv2d(batch size, #filter, kernel size, stride, padding)
-# 		#nn.BatchNorm2d(batch size)
-# 		self.go_cnn_layer[8]
-# 		self.go_relu_layer[5]
-# 		self.go_linear_layer = nn.Linear(361, CONNECT_LENGTH)
-# 		self.nlp_lstm = lstm(CONNECT_LENGTH, CONNECT_LENGTH, bidirectional = True)
-# 		self.nlp_hidden = (torch.randn(CONNECT_LENGTH, CONNECT_LENGTH), torch.randn(CONNECT_LENGTH, CONNECT_LENGTH))
-# 		self.num_cnn
-# 		self.num_relu
-# 		for i in range(8):
-# 			go_cnn_layer[i] = nn.Sequential(nn.Conv2d(1, 32, 3, 1, 1), 
-# 									nn.BatchNorm2d(32), 
-# 									nn.Parameter(torch.Tensor(1), requires_grad = True))
-# 			if i < 6:
-# 				go_relu_layer[i] = nn.ReLu()
-# 	def cnn(x, layer = 1):
-# 		num_cnn += layer
-# 		if layer == 1:
-# 			return go_cnn_layer[num_cnn - 1](x)
-# 		return go_cnn_layer[num_cnn - 2](relu(go_cnn_layer[num_cnn - 1](x)))
+	def relu(self, x):
+		self.num_relu += 1
+		return self.go_relu_layer[self.num_relu - 1](x)
 
-# 	def relu(x):
-# 		num_relu += 1
-# 		return go_relu_layer[num_relu - 1](x)
+	def forward(self, x, length):
+		self.num_cnn = 0
+		self.num_relu = 0
+		split = [x, x]	
 
-# 	def foward(self, x):
-# 		num_cnn = 0
-# 		num_relu = 0
-# 		spilt[2]
+		self.zero_grad()
 
-# 		#GO
-# 		spilt[1] = spilt[0] = relu(cnn(x))
-# 		spilt[0] = cnn(spilt[0], 2);
-# 		spilt[1] = spilt[0] = relu(spilt[0] + spilt[1])
-# 		spilt[0] = cnn(spilt[0], 2);
-# 		spilt[1] = spilt[0] = relu(spilt[0] + spilt[1])
-# 		spilt[0] = cnn(spilt[0], 2);
-# 		spilt[0] = relu(spilt[0] + spilt[1])
-# 		spilt[0] = cnn(spilt[0])
-# 		spilt[0] = go_linear_layer(spilt[0])
+		#GO
+		split[1] = split[0] = self.relu(self.cnn(x))
+		split[0] = self.cnn(split[0], 2);
+		split[1] = split[0] = self.relu(split[0] + split[1])
+		split[0] = self.cnn(split[0], 2);
+		split[1] = split[0] = self.relu(split[0] + split[1])
+		split[0] = self.cnn(split[0], 2);
+		split[0] = self.relu(split[0] + split[1])
+		split[0] = self.cnn(split[0])
+		split[0] = self.go_linear_layer(split[0].view(361))
 
-# 		#NLP
-# 		output, _ = nlp_lstm(spilt[0], nlp_hidden)
-# 		nlp_lstm.zero_grid()
-
-# 		return output
+		#NLP
+		output = torch.tensor([])
+		tmp, hidden = self.nlp_lstm(split[0].view(1, 1, 361))
+		output = torch.cat((output, tmp), dim = 0)
+		for i in range(length - 1):
+			tmp, hidden = self.nlp_lstm(tmp, hidden)
+			output = torch.cat((output, tmp), dim = 0)
+		return output.view(-1, 361)
 
 # main
 board = get_data('board.txt')
@@ -117,14 +125,34 @@ print('Size of converter: ', len(converter))
 if len(board) != len(comment):
 	print('#Data is incorrect.')
 
-# model = NET()
-# cost = nn.CrossEntropyLoss()
-# optimzer = optim.Adam(model.parameters())
+model = NET()
+optimzer = optim.Adam(model.parameters())
+loss_func = nn.MSELoss()
 
-# for epoch in range(EPOCH_NUM):
-# 	loss = 0.0
-# 	for data, word in dataset:
-# 		output = NET(data)
-# 		loss = nn.CrossEntropyLoss(output, word).backword()
-# 		optimzer.step()
-# 		print(output)
+if os.path.exists("weights.bin"):
+	model.load_state_dict(torch.load("weights.bin"))
+
+for epoch in range(EPOCH_NUM):
+	avg_loss = 0.0
+	for i in range(len(board)):
+		output = model(board[i].view((1, 1, 19, 19)), len(comment[i]))
+		loss = loss_func(output, comment[i])
+		loss.backward()
+		optimzer.step()
+		avg_loss += loss
+		print('#loss : ', loss)
+		print('Result : ', end = '')
+		for i in output:
+			value = 0
+			word = ''
+			for j in converter:
+				if torch.dot(i, converter[j]) > value:
+					value = torch.dot(i, converter[j])
+					word = j;
+			print(word, end = '')
+		print('\n')
+	print('Average Loss : ', avg_loss / len(board))
+
+
+
+torch.save(model.state_dict(), "weights.bin")
