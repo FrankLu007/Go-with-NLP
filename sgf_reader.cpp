@@ -105,7 +105,7 @@ public:
 					}
 				}
 			}
-			if(current % 19 && valid_postion(current - 1))
+				if(current % 19 && valid_postion(current - 1))
 			{
 				if(!board[current - 1]) {alive = 1; break;}
 				if(board[current - 1] == board[current])
@@ -185,7 +185,7 @@ public:
 	}
 	void print_board(FILE * fp)
 	{
-		for(unsigned i = 0 ; i < 361 ; i++) std::fprintf(fp, "%d ", i == position ? board[i] * 2 : board[i]);
+		for(unsigned i = 0 ; i < 361 ; i++) std::fprintf(fp, "%d ", i == position ? board[i] * 10 : board[i]);
 		std::fprintf(fp,"\n");
 	}
 	void arrange_comment()
@@ -196,8 +196,8 @@ public:
 		for(unsigned i = 0 ; i < len ;)
 		{
 			if(tmp[i] == ' ' || tmp[i] == '\n' || tmp[i] == '\r' || tmp[i] == '\t' || tmp[i] == '\\') {i++; continue;}
-			unicode_handler(tmp, comment, i, real);
-			comment[real++] = ' ';
+			//unicode_handler(tmp, comment, i, real);
+			comment[real++] = tmp[i++];
 		}
 		comment[real] = 0;
 	}
@@ -311,7 +311,6 @@ int main(const int argc, const char ** argv)
 					{
 						current->print_board(board);
 						std::fprintf(comment, "%s\n", current->comment);
-						
 					}
 					current = current->child[0];
 				}

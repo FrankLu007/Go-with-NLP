@@ -66,7 +66,7 @@ def get_data(filename, embedding = []):
 class NET(nn.Module):
 	def __init__(self):
 		super(NET, self).__init__()
-		#nn.Conv2d(batch size, #filter, kernel size, stride, padding)
+		#nn.Conv2d(in channel, out channel, kernel size, stride, padding)
 		#nn.BatchNorm2d(batch size)
 		self.go_cnn_layer = []
 		self.go_relu_layer = []
@@ -90,7 +90,7 @@ class NET(nn.Module):
 		self.num_relu += 1
 		return self.go_relu_layer[self.num_relu - 1](x)
 
-	def forward(self, x, length):
+	def forward(self, x, bb):
 		self.num_cnn = 0
 		self.num_relu = 0
 		split = [x, x]	
@@ -112,7 +112,7 @@ class NET(nn.Module):
 		output = torch.tensor([])
 		tmp, hidden = self.nlp_lstm(split[0].view(1, 1, 361))
 		output = torch.cat((output, tmp), dim = 0)
-		for i in range(length - 1):
+		for i in range(len(target) - 1):
 			tmp, hidden = self.nlp_lstm(tmp, hidden)
 			output = torch.cat((output, tmp), dim = 0)
 		return output.view(-1, 361)
@@ -127,7 +127,7 @@ if len(board) != len(comment):
 
 model = NET()
 optimzer = optim.Adam(model.parameters())
-loss_func = nn.MSELoss()
+loss_func = nn.NNLoss()
 
 if os.path.exists("weights.bin"):
 	model.load_state_dict(torch.load("weights.bin"))
