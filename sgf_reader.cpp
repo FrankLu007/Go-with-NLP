@@ -296,7 +296,8 @@ int main(const int argc, const char ** argv)
 		else if(!std::strcmp(command, "collect"))
 		{
 			DIR * dir = opendir("sgf/");
-			FILE * board = std::fopen("board.txt", "w"), * comment = std::fopen("comment.txt", "w");
+			// FILE * board = std::fopen("board.txt", "w"), * comment = std::fopen("comment.txt", "w");
+			FILE * data = std::fopen("data.txt", "w");
 			static char path[100];
 			struct dirent * sgf;
 
@@ -309,14 +310,15 @@ int main(const int argc, const char ** argv)
 				{
 					if(current->comment)
 					{
-						current->print_board(board);
-						std::fprintf(comment, "%s\n", current->comment);
+						current->print_board(data);
+						std::fprintf(data, "%s\n", current->comment);
 					}
 					current = current->child[0];
 				}
 			}
-			std::fclose(board);
-			std::fclose(comment);
+			std::fclose(data);
+			// std::fclose(board);
+			// std::fclose(comment);
 		}
 		else if(!std::strcmp(command, "embed"))
 		{
@@ -334,7 +336,7 @@ int main(const int argc, const char ** argv)
 			std::sprintf(path, "embeddings/character_embedding_%uD.txt", sz);
 			if(access(path, F_OK ) == -1)
 			{
-				std::sprintf(path, "embeddings/word2vec/trunk/word2vec -train comment.txt -output embeddings/character_embedding_%uD.txt -size %u -iter 100 -threads 6 -min-count 0\n", sz, sz);
+				std::sprintf(path, "embeddings/word2vec/trunk/word2vec -train comment.txt -output embeddings/character_embedding_%uD.txt -size %u -iter 100 -threads 8 -min-count 0\n", sz, sz);
 				system(path);
 				std::printf("\n");
 			}
