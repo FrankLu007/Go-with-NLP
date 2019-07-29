@@ -207,28 +207,22 @@ void build(char * sgf_raw_data, const char * end, MOVE * current)
 {
 	unsigned position;
 	char * comment = NULL;
-	while(sgf_raw_data < end && std::strncmp(sgf_raw_data, ";B[", 3) && std::strncmp(sgf_raw_data, ";W[", 3)) 
+	while(sgf_raw_data < end && (std::strncmp(sgf_raw_data, "B[", 2) || * (sgf_raw_data - 1) == 'L') && std::strncmp(sgf_raw_data, "W[", 2)) 
 	{
-		if(* sgf_raw_data == ')') return;
+		if(* sgf_raw_data == ')' || !strncmp(sgf_raw_data, "AB", 2) || !strncmp(sgf_raw_data, "AW", 2)) return;
 		sgf_raw_data++;
 	}
 	if(sgf_raw_data >= end) return;
-	position = encode_pos(sgf_raw_data + 3);
-	sgf_raw_data += 6;
-	while(sgf_raw_data < end && std::strncmp(sgf_raw_data, ";B[", 3) && std::strncmp(sgf_raw_data, ";W[", 3) && std::strncmp(sgf_raw_data, "C[", 2))
-	{
-		if(* sgf_raw_data == ')') return;
-		sgf_raw_data++;
-	}
-	if(sgf_raw_data >= end) return;
-	if(!std::strncmp(sgf_raw_data, "C[", 2) && std::strncmp(sgf_raw_data, "C[]", 3)) 
+	position = encode_pos(sgf_raw_data + 2);
+	sgf_raw_data += 5;
+	while(sgf_raw_data < end && (std::strncmp(sgf_raw_data, "B[", 2) || * (sgf_raw_data - 1) == 'L') && std::strncmp(sgf_raw_data, "W[", 2) && std::strncmp(sgf_raw_data, "C[", 2) && * sgf_raw_data != ')') sgf_raw_data++;
+	if(sgf_raw_data < end && !std::strncmp(sgf_raw_data, "C[", 2) && std::strncmp(sgf_raw_data, "C[]", 3)) 
 	{
 		comment = sgf_raw_data += 2;
 		while(* sgf_raw_data != ']') sgf_raw_data++;
 		* sgf_raw_data = 0;
 		sgf_raw_data++;
 	}
-	
 	build(sgf_raw_data, end, current->add_child(position, comment));
 }
 void load(const char * file_name)
