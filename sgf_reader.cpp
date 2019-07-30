@@ -185,6 +185,7 @@ public:
 	}
 	void print_board(FILE * fp)
 	{
+		std::fprintf(fp, "%u ", step);
 		for(unsigned i = 0 ; i < 361 ; i++) std::fprintf(fp, "%d ", i == position ? board[i] * 10 : board[i]);
 		std::fprintf(fp,"\n");
 	}
@@ -203,11 +204,18 @@ public:
 	}
 }board_root, * current = & board_root;
 void clear() {for(auto child : board_root.child) child->clear();}
+inline bool is_stone(const char * str)
+{
+	if(* str != 'B' && * str != 'W') return false;
+	if(* (str + 1) != '[') return false;
+	if(* (str - 1) >= 'A' && * (str - 1) <= 'Z') return false;
+	return true;
+}
 void build(char * sgf_raw_data, const char * end, MOVE * current)
 {
 	unsigned position;
 	char * comment = NULL;
-	while(sgf_raw_data < end && (std::strncmp(sgf_raw_data, "B[", 2) || * (sgf_raw_data - 1) == 'L') && std::strncmp(sgf_raw_data, "W[", 2)) 
+	while(sgf_raw_data < end && !is_stone(sgf_raw_data)) 
 	{
 		if(* sgf_raw_data == ')' || !strncmp(sgf_raw_data, "AB", 2) || !strncmp(sgf_raw_data, "AW", 2)) return;
 		sgf_raw_data++;
@@ -215,7 +223,7 @@ void build(char * sgf_raw_data, const char * end, MOVE * current)
 	if(sgf_raw_data >= end) return;
 	position = encode_pos(sgf_raw_data + 2);
 	sgf_raw_data += 5;
-	while(sgf_raw_data < end && (std::strncmp(sgf_raw_data, "B[", 2) || * (sgf_raw_data - 1) == 'L') && std::strncmp(sgf_raw_data, "W[", 2) && std::strncmp(sgf_raw_data, "C[", 2) && * sgf_raw_data != ')') sgf_raw_data++;
+	while(sgf_raw_data < end && !is_stone(sgf_raw_data) && std::strncmp(sgf_raw_data, "C[", 2) && * sgf_raw_data != ')') sgf_raw_data++;
 	if(sgf_raw_data < end && !std::strncmp(sgf_raw_data, "C[", 2) && std::strncmp(sgf_raw_data, "C[]", 3)) 
 	{
 		comment = sgf_raw_data += 2;
@@ -233,12 +241,11 @@ void load(const char * file_name)
 	std::fread(sgf_raw_data, 1, 100000, fp);
 	std::fclose(fp);
 
-	unsigned len = std::strlen(sgf_raw_data), index;
+	unsigned len = std::strlen(sgf_raw_data);
 	board_root = MOVE();
 
 	clear();
-	for(index = 0 ; index < len ; index++) if(!std::strncmp(sgf_raw_data + index, ";B[", 3)) break;
-	build(sgf_raw_data + index, sgf_raw_data + len, & board_root);
+	build(sgf_raw_data, sgf_raw_data + len, & board_root);
 	current = & board_root;
 }
 
@@ -246,7 +253,6 @@ int main(const int argc, const char ** argv)
 {
 	if(argc > 2) error_message("wrong usage.\nUsage: ./sgf_reader [sgf_file]");
 	if(argc == 2) load(argv[1]);
-
 	static char command[100];
 
 	while(std::printf("sgf_reader > ") && std::scanf("%s", command))
@@ -304,6 +310,7 @@ int main(const int argc, const char ** argv)
 				{
 					if(current->comment)
 					{
+						std::fprintf(data, "%s ", sgf->d_name);
 						current->print_board(data);
 						std::fprintf(data, "%s\n", current->comment);
 					}

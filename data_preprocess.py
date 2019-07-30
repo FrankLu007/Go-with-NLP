@@ -1,9 +1,10 @@
 # The program will divide the boards(GO) and the comments.
 
 import os
+import jieba
 
-replace_old = ['０', '１', '２', '３', '４', '５', '６', '７', '８', '９', '三·三', '：']
-replace_new = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '三三', ':']
+replace_old = ['０', '１', '２', '３', '４', '５', '６', '７', '８', '９', '三·三', '：', '①', '②']
+replace_new = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '三三', ':', '1', '2']
 
 def is_alpha(character) :
 	if len(character) != 1 :
@@ -136,6 +137,37 @@ def modify(comment) :
 	log(modify, changed)
 	return output_comment
 
+def cut(input_comment) :
+	output_comment = []
+	for line in input_comment :
+		output_comment.append(list(jieba.cut(line)))
+	return output_comment
+
+def add_label(chess, comment) :
+	output_comment = []
+	num = 0
+	unit = ['分白', '分', '小時', '勝', ':', '年', '日', '負的', '屆亞洲', '屆', '負', '目', '枚', '號的', '月', '年來訪', '分鐘', '目半', '段', '期', '局', '連勝', '目大空', '比', '人', '敗', '歲', '屆本', '年生', '年升']
+	for line_index in range(len(comment)) :
+		line = comment[line_index]
+		tmp = []
+		
+		for word_index in range(len(line)) :
+			if line[word_index].isdigit() and line[word_index + 1] not in unit and line[word_index - 1] not in [':', '比']:
+				dis = int(chess[line_index].split(' ')[1]) - int(line[word_index])
+				if dis > 10 or dis < -50 :
+					tmp.append(line[word_index])
+					continue
+				tmp.append('</step-' + str(dis) + '>')
+				if dis < 0 and line[word_index - 1] not in ['~', '-']:
+					num += 1
+					#print(chess[line_index].split(' ')[0], int(chess[line_index].split(' ')[1]))
+					#print(line[word_index - 1], line[word_index], line[word_index + 1])
+			else :
+				tmp.append(line[word_index])
+		output_comment.append(tmp)
+	print('#Label error : ', num)
+	return output_comment
+
 def save(chess, comment) :
 	with open('board.txt', 'w') as file :
 		for line in chess :
@@ -144,7 +176,12 @@ def save(chess, comment) :
 
 	with open('comment.txt', 'w') as file :
 		for line in comment :
-			file.write(line)
+			for word in line :
+				if word == '\n' :
+					file.write('</end>\n')
+				else :
+					file.write(word)
+					file.write(' ')
 	file.close()
 
 # main
@@ -162,4 +199,6 @@ chess, comment = filter(chess, comment, special_case, False)
 print('After filter \'special_case\', #data :', len(comment))
 for index in range(len(comment)) :
 	comment[index] = replace(comment[index], replace_old, replace_new)
+comment = cut(comment)
+comment = add_label(chess, comment)
 save(chess, comment)
