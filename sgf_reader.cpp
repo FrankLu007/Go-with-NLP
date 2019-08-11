@@ -334,10 +334,10 @@ int main(const int argc, const char ** argv)
 			
 			std::printf("Input the embedding size (less than 1000): ");
 			std::scanf("%u", &sz);
-			std::sprintf(path, "embeddings/character_embedding_%uD.txt", sz);
+			std::sprintf(path, "embeddings/embedding_%uD.txt", sz);
 			if(access(path, F_OK ) == -1)
 			{
-				std::sprintf(path, "embeddings/word2vec/trunk/word2vec -train comment.txt -output embeddings/character_embedding_%uD.txt -size %u -iter 100 -threads 8 -min-count 0\n", sz, sz);
+				std::sprintf(path, "embeddings/word2vec/trunk/word2vec -train comment.txt -output embeddings/embedding_%uD.txt -size %u -iter 100 -threads 8 -min-count 0\n", sz, sz);
 				system(path);
 				std::printf("\n");
 			}
