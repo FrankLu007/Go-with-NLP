@@ -29,7 +29,6 @@ public:
 		if(key == "AB" || key == "AW") error_message(std::string("shouldn't read \"") + key); // Add Black/White
 		else if(key == "B" || key == "W")
 		{
-			std::printf("%s %s\n", key.c_str(), data.c_str());
 			if((move.size() & 1) ^ (key == "W")) error_message(std::string("wrong order of ") + key + std::string(" ") + data );
 			move_t pos = (data[1] - 'a') * 19 + data[0] - 'a';
 			if(data.length() != 2 || pos > 361) error_message(std::string("wrong position : ") + data);

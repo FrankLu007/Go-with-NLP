@@ -1,7 +1,6 @@
-#include <cstring>
 #include <queue>
+#include <cstring>
 #include <unordered_set>
-#include <dirent.h>
 #include "game.cpp"
 
 class READER
@@ -84,7 +83,7 @@ public:
 			}
 			else if(!strcmp(command, "back"))
 			{
-				get_board(++current, game->second);
+				get_board(--current, game->second);
 				display(current, game->second.get_comment(current));
 			}
 			else if(!strcmp(command, "jump"))
@@ -134,6 +133,7 @@ public:
 		bool color;
 		static std::unordered_set <move_t> death;
 		std::memset(board, 0, sizeof(board));
+		if(!step) return ;
 		for(move_t i = 1 ; i <= step ; i++)
 		{
 			move_t position = game.get_move(i);
@@ -233,17 +233,36 @@ public:
 		}
 		return life ? life->size() == chi : true;
 	}
-};
-int main(const int argc, const char ** argv)
-{
-	static READER reader;
-	static char command[100];
-	DIR * dir = opendir("../sgf/");
-	struct dirent * sgf;
-	while(sgf = readdir(dir))
+
+	void collect(FILE * fp, unsigned N = 8, unsigned S = 8)
 	{
-		if(sgf->d_name[0] == '.') continue;
-		reader.load(std::string("../sgf/") + std::string(sgf->d_name));
+		static std::unordered_set <move_t> group, life;
+		std::unordered_set <move_t> def[S + 1], att[S + 1];
+		for(std::unordered_map <std::string, GAME>::iterator it = game_set.begin() ; it != game_set.end() ; it++)
+		{
+			GAME & game = it->second;
+			for(move_t step = 1 ; step <= game.size() ; step++)
+			{
+				std::string comment = game.get_comment(step);
+				if(comment == "(NULL)") continue;
+				for(move_t i = 1 ; i <= S ; i++) {def[i].clear(); att[i].clear();}
+				for(move_t i = N - 1 ; i ; i--)
+					std::fprintf(fp, "%d ", step >= i ? game.get_move(step - i) : -1);
+				std::fprintf(fp, "\n");
+				get_board(step, game);
+				for(move_t pos = 0 ; pos < 361 ; pos++)
+				{
+					if(board[pos])
+					{
+						get_group(pos, group, & life, 361);
+						if((board[pos] & 1) == (step & 1)) def[life.size() >= S ? S : life.size()].insert(group.begin(), group.end());
+						else att[life.size() >= S ? S : life.size()].insert(life.begin(), life.end());
+					}
+				}
+				for(move_t i = 1 ; i <= S ; i++) {for(auto pos : def[i]) std::fprintf(fp, "%u ", pos); std::fprintf(fp, "\n");}
+				for(move_t i = 1 ; i <= S ; i++) {for(auto pos : att[i]) std::fprintf(fp, "%u ", pos); std::fprintf(fp, "\n");}
+				std::fprintf(fp, "%s\n", comment.c_str());
+			}
+		}
 	}
-	return 0;
-}
+};
