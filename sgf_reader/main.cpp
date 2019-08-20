@@ -3,8 +3,14 @@
 
 READER reader;
 
-int main()
+int main(const int argc, const char ** argv)
 {
+	if(argc == 2)
+	{
+		reader.load(std::string(argv[1]));
+		reader.panel(0);
+		return 0;
+	}
 	DIR * dir = opendir("../sgf/");
 	struct dirent * sgf;
 	while(sgf = readdir(dir))

@@ -108,6 +108,7 @@ public:
 	}
 	void display(move_t step, std::string comment)
 	{
+		std::printf("\033[43m   ");
 		for(char a = 'A' ; a < 'T'; a++) std::printf("\033[30m %c", a); // print A ~ S
 		step = step ? step : 500;
 		for(move_t i = 0 ; i < 361 ; i++)
@@ -115,7 +116,7 @@ public:
 			if(i && board[i-1] == step) std::printf("\033[31m)\033[30m");
 			if(!(i % 19)) 
 			{
-				if(board[i - 1] != step) std::printf(" ");
+				if(!i || board[i - 1] != step) std::printf(" ");
 				std::printf(" \033[0m\n\033[30;43m %c ", 'A' + i / 19);
 			}
 			if(board[i] == step) std::printf("\033[31m(\033[30m");
@@ -219,7 +220,7 @@ public:
 				{
 					if(life) 
 					{
-						life->insert(pos - 1);
+						life->insert(pos + 19);
 						if(life->size() > chi) return false;
 					}
 					if(!chi) return false;
@@ -245,6 +246,7 @@ public:
 			{
 				std::string comment = game.get_comment(step);
 				if(comment == "(NULL)") continue;
+				std::printf("%s\n", game.name().c_str());
 				for(move_t i = 1 ; i <= S ; i++) {def[i].clear(); att[i].clear();}
 				for(move_t i = N - 1 ; i ; i--)
 					std::fprintf(fp, "%d ", step >= i ? game.get_move(step - i) : -1);
