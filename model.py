@@ -8,3 +8,14 @@ class Encoder(nn.Module) :
 
 	def forward(self, data) :
 		return self.lstm(data)
+
+class Decoder(nn.Module) :
+	def __init__(self) :
+		super(Decoder, self).__init__()
+		self.sofmax = nn.softmax2d()
+		self.lstm = nn.LSTMCell()
+		self.w_o = Variable(torch.rand(1), requires_grad = True)
+		self.w_c = Variable(torch.rand(1), requires_grad = True)
+
+	def forward(self, target, hidden_e) :
+		

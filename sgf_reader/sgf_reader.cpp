@@ -237,6 +237,7 @@ public:
 
 	void collect(FILE * fp, unsigned N = 8, unsigned S = 8)
 	{
+		unsigned count = 0;
 		static std::unordered_set <move_t> group, life;
 		std::unordered_set <move_t> def[S + 1], att[S + 1];
 		for(std::unordered_map <std::string, GAME>::iterator it = game_set.begin() ; it != game_set.end() ; it++)
@@ -263,8 +264,10 @@ public:
 				}
 				for(move_t i = 1 ; i <= S ; i++) {for(auto pos : def[i]) std::fprintf(fp, "%u ", pos); std::fprintf(fp, "\n");}
 				for(move_t i = 1 ; i <= S ; i++) {for(auto pos : att[i]) std::fprintf(fp, "%u ", pos); std::fprintf(fp, "\n");}
-				std::fprintf(fp, "%s\n", comment.c_str());
+				std::fprintf(fp, "%u\n%s\n", step, comment.c_str());
+				count++;
 			}
 		}
+		std::printf("Count : %u\n", count);
 	}
 };
