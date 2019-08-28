@@ -249,8 +249,8 @@ public:
 				if(comment == "(NULL)") continue;
 				std::printf("%s\n", game.name().c_str());
 				for(move_t i = 1 ; i <= S ; i++) {def[i].clear(); att[i].clear();}
-				for(move_t i = N - 1 ; i ; i--)
-					std::fprintf(fp, "%d ", step >= i ? game.get_move(step - i) : -1);
+				for(move_t i = N ; i ; i--)
+					std::fprintf(fp, "%d ", step >= i ? game.get_move(step - i + 1) : -1);
 				std::fprintf(fp, "\n");
 				get_board(step, game);
 				for(move_t pos = 0 ; pos < 361 ; pos++)

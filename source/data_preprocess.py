@@ -4,8 +4,8 @@ import os
 # import jieba
 # import monpa
 
-replace_old = ['０', '１', '２', '３', '４', '５', '６', '７', '８', '９', '三·三', '：', '①', '②', '③', '④', '⑤', '⑥']
-replace_new = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '三三', ':', '1', '2', '3', '4', '5', '6']
+replace_old = ['０', '１', '２', '３', '４', '５', '６', '７', '８', '９', '三·三', '：', '①', '②', '③', '④', '⑤', '⑥', ',', '.', '，', '。', '、', '？', '!']
+replace_new = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '三三', ':', '1', '2', '3', '4', '5', '6', '', '', '', '', '', '', '']
 
 def is_alpha(character) :
 	if len(character) != 1 :
@@ -62,12 +62,12 @@ def special_case(sentence) :
 def get_input(filename) :
 	chess = []
 	comment = []
-	tmp = []
 	with open(filename, 'r', errors = 'ignore') as file :
 		while True :
 			input_item = file.readline()
 			if not input_item :
 				break
+			tmp = []
 			tmp.append(input_item)
 			for i in range(17) :
 				tmp.append(file.readline())
@@ -81,7 +81,7 @@ def get_input(filename) :
 	return chess, comment
 
 def log(function, output_item) :
-	with open('abandon.txt', 'a') as file :
+	with open('../data/abandon.txt', 'a') as file :
 		file.write('')
 		if function == meanless :
 			file.write('----------meanless ' + str(len(output_item)) + '----------\n')
@@ -155,7 +155,7 @@ def add_label(chess, comment) :
 	unit = ['分白', '分', '小時', '勝', ':', '年', '日', '負的', '屆亞洲', '屆', '負', '目', '枚', '號的', '月', '年來訪', '分鐘', '目半', '段', '期', '局', '連勝', '目大空', '比', '人', '敗', '歲', '屆本', '年生', '年升']
 	for line_index in range(len(comment)) :
 		line = comment[line_index]
-		tmp = []
+		tmp = ''
 		word_index = 0
 		while word_index < len(line) :
 			if line[word_index].isdigit() :
@@ -166,33 +166,35 @@ def add_label(chess, comment) :
 				if word_index + 1 < len(line) and line[word_index + 1] not in unit and line[word_index - 1] not in [':', '比']:
 					dis = int(chess[line_index][-1].split('\n')[0]) - num
 					if dis <= 10 and dis >= -50 :
-						tmp.append('</step-' + str(dis) + '>')
+						tmp += ' </step-' + str(dis) + '>'
 				else :
-					tmp.append(str(num))
+					tmp += ' ' + str(num)
 			elif line[word_index] in ['黑', '白'] :
 				if (line[word_index] == '黑') ^ (int(chess[line_index][-1].split('\n')[0]) & 1):
-					tmp.append('</rcolor>')
+					tmp += ' </rcolor>'
 				else :
-					tmp.append('</color>')
+					tmp += ' </color>'
 			else :
-				tmp.append(line[word_index])
-			tmp.append(' ');
+				tmp += ' '
+				if line[word_index] == '\n' :
+					tmp += '</end>'
+				tmp += line[word_index]
 			word_index += 1
 		output_comment.append(tmp)
 	return output_comment
 
 def save(chess, comment) :
+	if len(chess) != len(comment) :
+		print('GG')
 	num = 0
-	with open('board.txt', 'w') as file :
+	with open('../data/board.txt', 'w') as file :
 		for line in chess :
 			for item in line :
 				file.write(item)
-			num += 1
-			print(num)
 	file.close()
 
 	max_length = 0
-	with open('comment.txt', 'w') as file :
+	with open('../data/comment.txt', 'w') as file :
 		for line in comment :
 			if len(line) > max_length :
 				max_length = len(line)
@@ -206,10 +208,10 @@ def save(chess, comment) :
 	print('Max Length :', max_length)
 
 # main
-chess, comment = get_input('data.txt')
+chess, comment = get_input('../data/data.txt')
 
-if os.path.exists('abandon.txt') :
-	os.remove('abandon.txt')
+if os.path.exists('../data/abandon.txt') :
+	os.remove('../data/abandon.txt')
 
 chess, comment = filter(chess, comment, meanless, False)
 print('After filter \'meanless\', #data :', len(comment))

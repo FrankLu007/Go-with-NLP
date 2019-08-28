@@ -1,10 +1,5 @@
 #!/bin/bash
 
-make
-echo -e 'collect\nq\n' | ./sgf_reader > /dev/null
+../sgf_reader/sgf_reader
 python3.6 data_preprocess.py
-if [ -f embeddings/character_embedding_$1D.txt ]
-then
-	rm embeddings/character_embedding_$1D.txt
-fi
-echo -e 'embed\n'$1'\nq\n' | ./sgf_reader > /dev/null
+../word2vec/trunk/word2vec -train ../data/comment.txt -output ../data/embedding_256D.txt -size 256 -min-count 0 -iter 10000 -threads 12
