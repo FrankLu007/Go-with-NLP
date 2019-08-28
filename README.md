@@ -31,10 +31,10 @@
   --batch_size [int]
   --sentence_length [int]
   --learning_rate [float]
-  --test [float]
-  --validdation [float]
+  --test [float]               proportion of test data
+  --validdation [float]        proportion of validation data
   --input_board [file]
   --input_comment [file]
   --embedding_file [file]
-  --weight [file]
+  --weight [file]              
   ```
