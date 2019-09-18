@@ -1,5 +1,6 @@
-# The program will divide the boards(GO) and the comments.
+# The program will divide the data into boards(GO) and the comments.
 
+from gensim.models import word2vec
 import os
 # import jieba
 # import monpa
@@ -69,7 +70,7 @@ def get_input(filename) :
 				break
 			tmp = []
 			tmp.append(input_item)
-			for i in range(17) :
+			for i in range(49) :
 				tmp.append(file.readline())
 			chess.append(tmp)
 			comment.append(file.readline())
@@ -164,7 +165,7 @@ def add_label(chess, comment) :
 					num = num * 10 + int(line[word_index + 1])
 					word_index += 1
 				if word_index + 1 < len(line) and line[word_index + 1] not in unit and line[word_index - 1] not in [':', '比']:
-					dis = int(chess[line_index][-1].split('\n')[0]) - num
+					dis = int(chess[line_index][0].split('\n')[0]) - num
 					if dis <= 10 and dis >= -50 :
 						tmp += ' </step-' + str(dis) + '>'
 				else :
@@ -194,7 +195,7 @@ def save(chess, comment) :
 	file.close()
 
 	max_length = 0
-	with open('../data/comment.txt', 'w') as file :
+	with open('../data/comment2.txt', 'w') as file :
 		for line in comment :
 			if len(line) > max_length :
 				max_length = len(line)
@@ -225,3 +226,11 @@ for index in range(len(comment)) :
 # comment = cut(comment)
 comment = add_label(chess, comment)
 save(chess, comment)
+sentences = word2vec.LineSentence("../data/comment.txt")
+model = word2vec.Word2Vec(sentences, size = 256, window = 10, min_count = 0, seed = 777, workers = 32, iter = 10000)
+model.save("../data/word2vec.model")
+# class gensim.models.word2vec.Word2Vec(sentences=None, size=100, 
+#                                       alpha=0.025, window=5, min_count=5, max_vocab_size=None, sample=0.001, 
+#                                       seed=1, workers=3, min_alpha=0.0001, sg=0, hs=0, negative=5, cbow_mean=1, 
+#                                       hashfxn=<built-in function hash>, iter=5, null_word=0, trim_rule=None, 
+#                                       sorted_vocab=1, batch_words=10000)

@@ -9,8 +9,8 @@ device = torch.device(('cuda:' + args['gpu']) if torch.cuda.is_available() else 
 data = DATA(args['input_board'], args['input_comment'], args['embedding_file'], args['sentence_length'])
 data.to(device)
 data.cut_data(args['validation'], args['test'], args['batch_size'])
-encoder = Encoder(data.num_word, 1, args['batch_size'], device).to(device)
-decoder = Decoder(data.embedding_dim, data.num_word, args['batch_size'], 24, data.table_vector, args['sentence_length'], device).to(device)
+encoder = Encoder(256, 1, args['batch_size'], device).to(device)
+decoder = Decoder(data.embedding_dim, data.num_word, args['batch_size'], 49, data.table_vector, args['sentence_length'], device).to(device)
 optimzer = torch.optim.Adam(list(encoder.parameters()) + list(decoder.parameters()), lr = args['learning_rate'])
 loss_func = torch.nn.CrossEntropyLoss(ignore_index = -1)
 

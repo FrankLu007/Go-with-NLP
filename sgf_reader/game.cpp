@@ -9,7 +9,7 @@ typedef unsigned short move_t; // used in postion and number of move
 class GAME
 {
 	std::string filename;
-	std::vector <move_t> move;
+	std::vector <move_t> move; // the position of each move, 0 ~ 360 represent position, 361 represents "pass"
 	std::unordered_map <move_t, std::string> comment; // move id --> comment
 public:
 	GAME()
@@ -29,6 +29,7 @@ public:
 		if(key == "AB" || key == "AW") error_message(std::string("shouldn't read \"") + key); // Add Black/White
 		else if(key == "B" || key == "W")
 		{
+			// check the order
 			if((move.size() & 1) ^ (key == "W")) error_message(std::string("wrong order of ") + key + std::string(" ") + data );
 			move_t pos = (data[1] - 'a') * 19 + data[0] - 'a';
 			if(data.length() != 2 || pos > 361) error_message(std::string("wrong position : ") + data);
@@ -36,7 +37,7 @@ public:
 		}
 		else if(key == "C") comment[move.size()] = data;
 	}
-	inline move_t get_move(move_t step) {if(step > move.size()) error_message(std::string("too large step ") + std::to_string(step)); return move[step - 1];}
+	inline move_t get_move(move_t step) {if(step > move.size()) error_message(std::string("step exceed ") + std::to_string(step)); return move[step - 1];}
 	inline std::string get_comment(move_t step) {return comment.find(step) == comment.end() ? std::string("(NULL)") : comment[step];}
 	inline std::string & name() {return filename;}
 	inline const char * name() const {return filename.c_str();}

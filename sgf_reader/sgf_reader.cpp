@@ -150,6 +150,10 @@ public:
 
 	bool get_group(const move_t position, std::unordered_set <move_t> & group, std::unordered_set <move_t> * life, const unsigned chi = 361)
 	{
+		// position : the beginning of the search
+		// group : the target
+		// life : the rest of chi
+		// chi : if the group has more than N chi, return false
 		static std::queue <move_t> q; // store position, used in bfs
 		while(!q.empty()) q.pop();
 		q.push(position);
@@ -235,11 +239,11 @@ public:
 		return life ? life->size() == chi : true;
 	}
 
-	void collect(FILE * fp, unsigned N = 8, unsigned S = 8)
+	void collect(FILE * fp, unsigned N = 8)
 	{
 		unsigned count = 0;
 		static std::unordered_set <move_t> group, life;
-		std::unordered_set <move_t> def[S + 1], att[S + 1];
+		std::unordered_set <move_t> def[N + 1], att[N + 1];
 		for(std::unordered_map <std::string, GAME>::iterator it = game_set.begin() ; it != game_set.end() ; it++)
 		{
 			GAME & game = it->second;
@@ -248,23 +252,71 @@ public:
 				std::string comment = game.get_comment(step);
 				if(comment == "(NULL)") continue;
 				std::printf("%s\n", game.name().c_str());
-				for(move_t i = 1 ; i <= S ; i++) {def[i].clear(); att[i].clear();}
-				for(move_t i = N ; i ; i--)
-					std::fprintf(fp, "%d ", step >= i ? game.get_move(step - i + 1) : -1);
-				std::fprintf(fp, "\n");
+				for(move_t i = 1 ; i <= N ; i++) {def[i].clear(); att[i].clear();}
+
+				std::fprintf(fp, "%u\n", step);
+				// previous N step
+				for(move_t i = N ; i ; i--) 
+				{
+					get_board(step <= i - 1 ? 0 : step - i + 1, game);
+					for(move_t pos = 0 ; pos < 361 ; pos++) if(board[pos] == 1) std::fprintf(fp, "%u ", pos); // black
+					std::fprintf(fp, "\n");
+					for(move_t pos = 0 ; pos < 361 ; pos++) if(board[pos] == -1) std::fprintf(fp, "%u ", pos); // white
+					std::fprintf(fp, "\n");
+				}
+
+				// 1~8+ liberty & capture size
+				get_board(step <= 1 ? 0 : step - 1, game);
+				for(move_t pos = 0 ; pos < 361 ; pos++)
+					if(board[pos])
+					{
+						get_group(pos, group, & life);
+						if((board[pos] & 1) == (step & 1)) def[life.size() >= N ? N : life.size()].insert(group.begin(), group.end());
+						else att[life.size() >= N ? N : life.size()].insert(life.begin(), life.end());
+					}
+				for(move_t i = 1 ; i <= N ; i++) {for(auto pos : def[i]) std::fprintf(fp, "%u ", pos); std::fprintf(fp, "\n");}
+				for(move_t i = 1 ; i <= N ; i++) {for(auto pos : att[i]) std::fprintf(fp, "%u ", pos); std::fprintf(fp, "\n");}
+				for(move_t i = 1 ; i <= N ; i++) {def[i].clear(); att[i].clear();}
+
+				// self-Atari size
+				for(move_t pos = 0 ; pos < 361 ; pos++)
+					if((board[pos] & 1) == (step & 1))
+					{
+						get_board(step <= 1 ? 0 : step - 1, game);
+						if(get_group(pos, group, & life, 2))
+						{
+							move_t a = * life.begin(), b = * (life.begin() ++);
+							board[a] = step;
+							if(get_group(pos, group, & life, 1)) 
+								att[group.size() >= N ? N : group.size()].insert(a);
+							board[a] = 0;
+							board[b] = step;
+							if(get_group(pos, group, & life, 1)) 
+								att[group.size() >= N ? N : group.size()].insert(b);
+							board[b] = 0;
+						}
+					}
+				for(move_t i = 1 ; i <= N ; i++) {for(auto pos : att[i]) std::fprintf(fp, "%u ", pos); std::fprintf(fp, "\n");}
+
+
+				// liberty after move
 				get_board(step, game);
 				for(move_t pos = 0 ; pos < 361 ; pos++)
 				{
-					if(board[pos])
+					if(board[pos] && (board[pos] & 1) == (step & 1))
 					{
-						get_group(pos, group, & life, 361);
-						if((board[pos] & 1) == (step & 1)) def[life.size() >= S ? S : life.size()].insert(group.begin(), group.end());
-						else att[life.size() >= S ? S : life.size()].insert(life.begin(), life.end());
+						get_group(pos, group, & life);
+						def[life.size() >= N ? N : life.size()].insert(group.begin(), group.end());
 					}
 				}
-				for(move_t i = 1 ; i <= S ; i++) {for(auto pos : def[i]) std::fprintf(fp, "%u ", pos); std::fprintf(fp, "\n");}
-				for(move_t i = 1 ; i <= S ; i++) {for(auto pos : att[i]) std::fprintf(fp, "%u ", pos); std::fprintf(fp, "\n");}
-				std::fprintf(fp, "%u\n%s\n", step, comment.c_str());
+				for(move_t i = 1 ; i <= N ; i++) {for(auto pos : def[i]) std::fprintf(fp, "%u ", pos); std::fprintf(fp, "\n");}
+
+				// turn color
+				std::fprintf(fp, "%d\n", step & 1);
+
+				// comment
+				std::fprintf(fp, "%s\n", comment.c_str());
+
 				count++;
 			}
 		}

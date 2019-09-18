@@ -1,6 +1,6 @@
 import sys
 
-args = {'gpu' : 0, 'epoch' : 1000, 'learning_rate' : 0.0001, 'batch_size' : 32,\
+args = {'gpu' : '0', 'epoch' : 1000, 'learning_rate' : 0.0001, 'batch_size' : 32,\
 		'test' : 0.1, 'validation' : 0.1, 'input_board' : '../data/board.txt', 'input_comment' : '../data/comment.txt',\
 		'embedding_file' : '../data/embedding_256D.txt', 'sentence_length' : 2010, 'weight' : None}
 float_args = ['learning_rate', 'test', 'validation']

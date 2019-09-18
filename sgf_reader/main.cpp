@@ -18,5 +18,6 @@ int main(const int argc, const char ** argv)
 		if(sgf->d_name[0] == '.') continue;
 		reader.load(std::string("../sgf/") + std::string(sgf->d_name));
 	}
+	std::printf("Collecting...\n");
 	reader.collect(std::fopen("../data/data.txt", "w"));
 }
