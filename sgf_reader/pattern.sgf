@@ -1,0 +1,168 @@
+(
+  ;GM[1]AP[Sabaki:0.43.1]CA[UTF-8]SZ[19]
+  (
+    ;AB[dd][kc][qd]N[Low Chinese Opening][低中國流]C[corner]CR[aa][ba][ca][da][ea][fa][ga][ha][ia][ja][ka][la][ma][na][oa][pa][qa][ra][sa][ab][bb][cb][db][eb][fb][gb][hb][ib][jb][kb][lb][mb][nb][ob][pb][qb][rb][sb][ac][bc][cc][dc][ec][fc][gc][hc][ic][jc][lc][mc][nc][oc][pc][qc][rc][sc][ad][bd][cd][ed][fd][gd][hd][id][jd][kd][ld][md][nd][od][pd][rd][sd][ae][be][ce][de][ee][fe][ge][he][ie][je][ke][le][me][ne][oe][pe][qe][re][se]MA[kc]
+  )
+  (
+    ;AB[dd][kd][qd]N[High Chinese Opening][高中國流]C[corner]CR[aa][ba][ca][da][ea][fa][ga][ha][ia][ja][ka][la][ma][na][oa][pa][qa][ra][sa][ab][bb][cb][db][eb][fb][gb][hb][ib][jb][kb][lb][mb][nb][ob][pb][qb][rb][sb][ac][bc][cc][dc][ec][fc][gc][hc][ic][jc][kc][lc][mc][nc][oc][pc][qc][rc][sc][ad][bd][cd][ed][fd][gd][hd][id][jd][ld][md][nd][od][pd][rd][sd][ae][be][ce][de][ee][fe][ge][he][ie][je][ke][le][me][ne][oe][pe][qe][re][se]MA[kd]
+  )
+  (
+    ;AB[dd][pc][qe]N[Orthodox Opening][舒式布局]C[corner]CR[aa][ba][ca][da][ea][fa][ga][ha][ia][ja][ka][la][ma][na][oa][pa][qa][ra][sa][ab][bb][cb][db][eb][fb][gb][hb][ib][jb][kb][lb][mb][nb][ob][pb][qb][rb][sb][ac][bc][cc][dc][ec][fc][gc][hc][ic][jc][kc][lc][mc][nc][oc][qc][rc][sc][ad][bd][cd][ed][fd][gd][hd][id][jd][kd][ld][md][nd][od][pd][qd][rd][sd][ae][be][ce][de][ee][fe][ge][he][ie][je][ke][le][me][ne][oe][pe][re][se][af][bf][cf][df][ef][ff][gf][hf][if][jf][kf][lf][mf][nf][of][pf][qf][rf][sf]MA[dd][qe]
+  )
+  (
+    ;AB[cd][pc][qe]N[Enclosure Opening]C[corner]CR[aa][ba][ca][da][ea][fa][ga][ha][ia][ja][ka][la][ma][na][oa][pa][qa][ra][sa][ab][bb][cb][db][eb][fb][gb][hb][ib][jb][kb][lb][mb][nb][ob][pb][qb][rb][sb][ac][bc][cc][dc][ec][fc][gc][hc][ic][jc][kc][lc][mc][nc][oc][qc][rc][sc][ad][bd][dd][ed][fd][gd][hd][id][jd][kd][ld][md][nd][od][pd][qd][rd][sd][ae][be][ce][de][ee][fe][ge][he][ie][je][ke][le][me][ne][oe][pe][re][se][af][bf][cf][df][ef][ff][gf][hf][if][jf][kf][lf][mf][nf][of][pf][qf][rf][sf]MA[cd][qe]
+  )
+  (
+    ;AB[dc][nc][jd]AW[pd]N[Kobayashi Opening][小林流]C[corner]CR[aa][ba][ca][da][ea][fa][ga][ha][ia][ja][ka][la][ma][na][oa][pa][qa][ra][sa][ab][bb][cb][db][eb][fb][gb][hb][ib][jb][kb][lb][mb][nb][ob][pb][qb][rb][sb][ac][bc][cc][ec][fc][gc][hc][ic][jc][kc][lc][mc][oc][pc][qc][rc][sc][ad][bd][cd][dd][ed][fd][gd][hd][id][kd][ld][md][nd][od][qd][rd][sd][ae][be][ce][de][ee][fe][ge][he][ie][je][ke][le][me][ne][oe][pe][qe][re][se]MA[nc][jd]
+  )
+  (
+    ;AB[cd][nc][ic]AW[pd]N[Small Chinese Opening][迷你中國流]C[corner]CR[aa][ba][ca][da][ea][fa][ga][ha][ia][ja][ka][la][ma][na][oa][pa][qa][ra][sa][ab][bb][cb][db][eb][fb][gb][hb][ib][jb][kb][lb][mb][nb][ob][pb][qb][rb][sb][ac][bc][cc][dc][ec][fc][gc][hc][jc][kc][lc][mc][oc][pc][qc][rc][sc][ad][bd][dd][ed][fd][gd][hd][id][jd][kd][ld][md][nd][od][qd][rd][sd][ae][be][ce][de][ee][fe][ge][he][ie][je][ke][le][me][ne][oe][pe][qe][re][se]MA[ic][nc]
+  )
+  (
+    ;AB[cd][hc][nc]AW[pd]N[Micro Chinese Opening]C[corner]CR[aa][ba][ca][da][ea][fa][ga][ha][ia][ja][ka][la][ma][na][oa][pa][qa][ra][sa][ab][bb][cb][db][eb][fb][gb][hb][ib][jb][kb][lb][mb][nb][ob][pb][qb][rb][sb][ac][bc][cc][dc][ec][fc][gc][ic][jc][kc][lc][mc][oc][pc][qc][rc][sc][ad][bd][dd][ed][fd][gd][hd][id][jd][kd][ld][md][nd][od][qd][rd][sd][ae][be][ce][de][ee][fe][ge][he][ie][je][ke][le][me][ne][oe][pe][qe][re][se]MA[hc][nc]
+  )
+  (
+    ;AB[pd][jd][dd]N[Sanrensei Opening][三連星]C[corner]CR[aa][ba][ca][da][ea][fa][ga][ha][ia][ja][ka][la][ma][na][oa][pa][qa][ra][sa][ab][bb][cb][db][eb][fb][gb][hb][ib][jb][kb][lb][mb][nb][ob][pb][qb][rb][sb][ac][bc][cc][dc][ec][fc][gc][hc][ic][jc][kc][lc][mc][nc][oc][pc][qc][rc][sc][ad][bd][cd][ed][fd][gd][hd][id][kd][ld][md][nd][od][qd][rd][sd][ae][be][ce][de][ee][fe][ge][he][ie][je][ke][le][me][ne][oe][pe][qe][re][se]MA[jd]
+  )
+  (
+    ;AB[dd][pd]N[Nirensei Opening][二連星]C[corner]CR[aa][ba][ca][da][ea][fa][ga][ha][ia][ja][ka][la][ma][na][oa][pa][qa][ra][sa][ab][bb][cb][db][eb][fb][gb][hb][ib][jb][kb][lb][mb][nb][ob][pb][qb][rb][sb][ac][bc][cc][dc][ec][fc][gc][hc][ic][jc][kc][lc][mc][nc][oc][pc][qc][rc][sc][ad][bd][cd][ed][fd][gd][hd][id][jd][kd][ld][md][nd][od][qd][rd][sd][ae][be][ce][de][ee][fe][ge][he][ie][je][ke][le][me][ne][oe][pe][qe][re][se]MA[dd][pd]
+  )
+  (
+    ;AB[qd][pq][cp][pe]AW[dc][oc][qo]N[Shūsaku Opening][秀策流]C[corner]CR[aa][ba][ca][da][ea][fa][ga][ha][ia][ja][ka][la][ma][na][oa][pa][qa][ra][sa][ab][bb][cb][db][eb][fb][gb][hb][ib][jb][kb][lb][mb][nb][ob][pb][qb][rb][sb][ac][bc][cc][ec][fc][gc][hc][ic][jc][kc][lc][mc][nc][pc][qc][rc][sc][ad][bd][cd][dd][ed][fd][gd][hd][id][jd][kd][ld][md][nd][od][pd][rd][sd][ae][be][ce][de][ee][fe][ge][he][ie][je][ke][le][me][ne][oe][qe][re][se][af][bf][cf][df][ef][ff][gf][hf][if][jf][kf][lf][mf][nf][of][pf][qf][rf][sf][ag][bg][cg][dg][eg][fg][gg][hg][ig][jg][kg][lg][mg][ng][og][pg][qg][rg][sg][ah][bh][ch][dh][eh][fh][gh][hh][ih][jh][kh][lh][mh][nh][oh][ph][qh][rh][sh][ai][bi][ci][di][ei][fi][gi][hi][ii][ji][ki][li][mi][ni][oi][pi][qi][ri][si][aj][bj][cj][dj][ej][fj][gj][hj][ij][jj][kj][lj][mj][nj][oj][pj][qj][rj][sj][ak][bk][ck][dk][ek][fk][gk][hk][ik][jk][kk][lk][mk][nk][ok][pk][qk][rk][sk][al][bl][cl][dl][el][fl][gl][hl][il][jl][kl][ll][ml][nl][ol][pl][ql][rl][sl][am][bm][cm][dm][em][fm][gm][hm][im][jm][km][lm][mm][nm][om][pm][qm][rm][sm][an][bn][cn][dn][en][fn][gn][hn][in][jn][kn][ln][mn][nn][on][pn][qn][rn][sn][ao][bo][co][do][eo][fo][go][ho][io][jo][ko][lo][mo][no][oo][po][ro][so][ap][bp][dp][ep][fp][gp][hp][ip][jp][kp][lp][mp][np][op][pp][qp][rp][sp][aq][bq][cq][dq][eq][fq][gq][hq][iq][jq][kq][lq][mq][nq][oq][qq][rq][sq][ar][br][cr][dr][er][fr][gr][hr][ir][jr][kr][lr][mr][nr][or][pr][qr][rr][sr][as][bs][cs][ds][es][fs][gs][hs][is][js][ks][ls][ms][ns][os][ps][qs][rs][ss]MA[qd][pe][cp]
+  )
+  (
+    ;AB[qc]N[3-3 Point][三三]C[corner]CR[qa][ra][sa][qb][rb][sb][rc][sc]MA[qc]
+  )
+  (
+    ;AW[qd]AB[oc]N[Low Approach][(小目)(小馬步)掛角]C[corner]CR[na][nb][nc][nd][ne][oa][ob][od][oe][pa][pb][pc][pd][pe][qa][qb][qc][qe][ra][rb][rc][rd][re][sa][sb][sc][sd][se]MA[oc]
+  )
+  (
+    ;AW[pd]AB[nc]N[Low Approach][(星位)(小馬步)掛角]C[corner]CR[ma][mb][mc][md][me][na][nb][nd][ne][oa][ob][oc][od][oe][pa][pb][pc][pe][qa][qb][qc][qd][qe][ra][rb][rc][rd][re][sa][sb][sc][sd][se]MA[nc]
+  )
+  (
+    ;AW[qd]AB[od]N[High Approach][(小目)一間高掛]C[corner]CR[na][nb][nc][nd][ne][oa][ob][oc][oe][pa][pb][pc][pd][pe][qa][qb][qc][qe][ra][rb][rc][rd][re][sa][sb][sc][sd][se]MA[od]
+  )
+  (
+    ;AW[pd]AB[nd]N[High Approach][(星位)一間高掛]C[corner]CR[ma][mb][mc][md][me][na][nb][nc][ne][oa][ob][oc][od][oe][pa][pb][pc][pe][qa][qb][qc][qd][qe][ra][rb][rc][rd][re][sa][sb][sc][sd][se]MA[nd]
+  )
+  (
+    ;AB[oc][qd]N[Low Enclosure][(小目)(小馬步)遞角]C[corner]CR[na][oa][pa][qa][ra][sa][nb][ob][pb][qb][rb][sb][nc][pc][qc][rc][sc][nd][od][pd][rd][sd][ne][oe][pe][qe][re][se]MA[oc]
+  )
+  (
+    ;AB[nc][pd]N[Low Enclosure][(星位)(小馬步)遞角]C[corner]CR[ma][na][oa][pa][qa][ra][sa][mb][nb][ob][pb][qb][rb][sb][mc][oc][pc][qc][rc][sc][md][nd][od][qd][rd][sd][me][ne][oe][pe][qe][re][se]MA[nc]
+  )
+  (
+    ;AB[od][qd]N[High Enclosure]C[corner]CR[na][oa][pa][qa][ra][sa][nb][ob][pb][qb][rb][sb][nc][oc][pc][qc][rc][sc][nd][pd][rd][sd][ne][oe][pe][qe][re][se]MA[od][qd]
+  )
+  (
+    ;AB[nd][pd]N[High Enclosure]C[corner]CR[ma][na][oa][pa][qa][ra][sa][mb][nb][ob][pb][qb][rb][sb][mc][nc][oc][pc][qc][rc][sc][md][od][qd][rd][sd][me][ne][oe][pe][qe][re][se]MA[nd]
+  )
+  (
+    ;AB[nc][qd]N[Low Enclosure][(小目)大馬步遞角]C[corner]CR[ma][na][oa][pa][qa][ra][sa][mb][nb][ob][pb][qb][rb][sb][mc][oc][pc][qc][rc][sc][md][nd][od][pd][rd][sd][me][ne][oe][pe][qe][re][se]MA[nc]
+  )
+  (
+    ;AB[mc][pd]N[Low Enclosure][(星位)大馬步遞角]C[corner]CR[la][ma][na][oa][pa][qa][ra][sa][lb][mb][nb][ob][pb][qb][rb][sb][lc][nc][oc][pc][qc][rc][sc][ld][md][nd][od][qd][rd][sd][le][me][ne][oe][pe][qe][re][se]MA[mc]
+  )
+  (
+    ;AB[nd][qd]N[High Enclosure]C[corner]CR[ma][na][oa][pa][qa][ra][sa][mb][nb][ob][pb][qb][rb][sb][mc][nc][oc][pc][qc][rc][sc][md][od][pd][rd][sd][me][ne][oe][pe][qe][re][se]MA[nd]
+  )
+  (
+    ;AB[md][pd]N[High Enclosure]C[corner]CR[la][ma][na][oa][pa][qa][ra][sa][lb][mb][nb][ob][pb][qb][rb][sb][lc][mc][nc][oc][pc][qc][rc][sc][ld][nd][od][qd][rd][sd][le][me][ne][oe][pe][qe][re][se]MA[md]
+  )
+  (
+    ;AB[dd][de][ef][ff][fd]N[Mouth Shape][方形]CR[ec][ed][fe][ge]MA[fd]
+  )
+  (
+    ;AB[dd][de][fd][ff]N[Table Shape]MA[fd][ff]CR[ed][ee][fe][ge]
+  )
+  (
+    ;AB[dd][ed][df][fg]N[Tippy Table]CR[de][ee][ef][ff]MA[fg]
+  )
+  (
+    ;AB[dd][ed][df][ef]N[Bamboo Joint][雙]MA[dd][ed][df][ef]CR[de][ee]
+  )
+  (
+    ;AB[dd][de][fd][ge]N[Trapezium]CR[ed][gd][ee][fe][ff]MA[fd][ge]
+  )
+  (
+    ;AB[dd][ce][ee][df]N[Diamond]MA[dd][ce][ee][df]CR[de]
+  )
+  (
+    ;AB[dd][ee][fd]N[Tiger’s Mouth][虎]CR[ec][ed]MA[dd][fd]
+  )
+  (
+    ;AB[dd][de][ed]N[Empty Triangle][餘形]MA[dd][ed][de]CR[ee]
+  )
+  (
+    ;AB[dd][ed][ee]AW[de]N[Turn][拐]MA[dd][ee]
+  )
+  (
+    ;AB[dd][de]N[Stretch][長]MA[dd][de]
+  )
+  (
+    ;AB[dd][ee]N[Diagonal][尖]MA[dd][ee]CR[ed][de]
+  )
+  (
+    ;AB[dd]AW[ed][cd]N[Wedge][挖]CR[dc][de]MA[dd]
+  )
+  (
+    ;AB[dd][ee]AW[ed]N[Hane][扳]MA[dd][ee]CR[de] 
+  )
+  (
+    ;AB[dd][ee]AW[ed][de]N[Cut][斷]MA[dd][ee]
+  )
+  (
+    ;AB[dd][fd][ff][df]N[Square]MA[dd][df][fd][ff]CR[de][ed][ee][fe]
+  )
+  (
+    ;AB[dd][ef][fc][ge]N[Throwing Star]AE[fd][ff][df]MA[dd][ef][fc][ge]CR[de][ec][ed][ee][fd][fe][ff][gd]
+  )
+  (
+    ;AB[dd][fe][df][fg]N[Parallelogram][GG]MA[dd][fe][df][fg]CR[ee][ef]
+  )
+  (
+    ;AB[dd][df][fe]N[Dog’s Head]MA[fe]CR[ed][de][ee][ef]
+  )
+  (
+    ;AB[dd][df][ge]N[Horse’s Head]MA[ge]CR[ed][de][ee][fe][ef]
+  )
+  (
+    ;AB[dd]AW[ed]N[Attachment][碰]CR[dc][ec][de][ee]MA[dd]
+  )
+  (
+    ;AB[dd][fd]N[One-Point Jump][(一間)跳]MA[dd][fd]CR[ed]
+  )
+  (
+    ;AB[dd][fe][eg]N[Big Bulge]MA[dd][fe][eg]CR[ee][ef]
+  )
+  (
+    ;AB[dd][fe]N[Small Knight][飛]MA[dd][fe]CR[ed][ee]
+  )
+  (
+    ;AB[dd][gd]N[Two-Point Jump][二間跳]MA[dd][gd]CR[ed][fd]
+  )
+  (
+    ;AB[dd][ge]N[Large Knight][大飛]MA[dd][ge]CR[ed][fd][ee][fe]
+  )
+  (
+    ;AB[dd]AW[ee]N[Shoulder Hit][肩衝]CR[cc][dc][ec][cd][ed][ce][de]MA[dd]
+  )
+  (
+    ;AB[dd][ff]N[Diagonal Jump][象飛]MA[dd][ff]CR[ed][de][ee][fe][ef]
+  )
+  (
+    ;N[4-4 Point][星位]C[corner]AB[pd]CR[pa][pb][pc][qa][qb][qc][qd][ra][rb][rc][rd][sa][sb][sc][sd]MA[pd]
+  )
+)
+
+Format :
+- AB : add black stones
+- AW : add white stones
+- N  : name (English, Chinese)
+- C  : comment (the shape is at the corner or not)
+- CR : circle (the position that must be blank)
+- MA : mark (the position set that the last step must be included)
+
+Note :
+- [ ] We need additional condition to classify shoulder hit (肩衝), the attacker should be the higher(closer to tengen(天元)) one.
+- [ ] Some opening(布局) include too many blank points(CR)

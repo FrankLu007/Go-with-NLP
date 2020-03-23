@@ -51,7 +51,7 @@ class DATA() :
 				if len(tmp[0]) == 0 :
 					break
 				self.num_step.append(int(tmp[0]))
-				for i in range(49) :
+				for i in range(16) :
 					tmp = file.readline().split(' ')
 					if tmp[-1] == '\n' :
 						tmp.pop(-1)
@@ -75,7 +75,7 @@ class DATA() :
 					sentence = torch.cat((sentence, torch.LongTensor([-1 for i in range(self.sentence_length - len(sentence))])))
 				elif len(sentence) > self.sentence_length :
 					sentence = sentence[0 : self.sentence_length - 1]
-					sentence = torch.cat((sentence, torch.LongTensor([self.table_word.index('</end></end>')])), dim = 0)
+					sentence = torch.cat((sentence, torch.LongTensor([self.table_word.index('</end>')])), dim = 0)
 				self.comment = torch.cat((self.comment, sentence.view(1, self.sentence_length)), dim = 0)
 
 		if len(self.comment) != len(self.board) :

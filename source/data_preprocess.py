@@ -1,6 +1,6 @@
 # The program will divide the data into boards(GO) and the comments.
 
-from gensim.models import word2vec
+# from gensim.models import word2vec
 import os
 # import jieba
 # import monpa
@@ -70,7 +70,7 @@ def get_input(filename) :
 				break
 			tmp = []
 			tmp.append(input_item)
-			for i in range(49) :
+			for i in range(16) :
 				tmp.append(file.readline())
 			chess.append(tmp)
 			comment.append(file.readline())
@@ -171,7 +171,7 @@ def add_label(chess, comment) :
 				else :
 					tmp += ' ' + str(num)
 			elif line[word_index] in ['黑', '白'] :
-				if (line[word_index] == '黑') ^ (int(chess[line_index][-1].split('\n')[0]) & 1):
+				if (line[word_index] == '黑') ^ (int(chess[line_index][0].split('\n')[0]) & 1):
 					tmp += ' </rcolor>'
 				else :
 					tmp += ' </color>'
@@ -195,15 +195,12 @@ def save(chess, comment) :
 	file.close()
 
 	max_length = 0
-	with open('../data/comment2.txt', 'w') as file :
+	with open('../data/comment.txt', 'w') as file :
 		for line in comment :
 			if len(line) > max_length :
 				max_length = len(line)
 			for word in line :
-				if word == '\n' :
-					file.write('</end>\n')
-				else :
-					file.write(word)
+				file.write(word)
 	file.close()
 
 	print('Max Length :', max_length)
@@ -226,9 +223,9 @@ for index in range(len(comment)) :
 # comment = cut(comment)
 comment = add_label(chess, comment)
 save(chess, comment)
-sentences = word2vec.LineSentence("../data/comment.txt")
-model = word2vec.Word2Vec(sentences, size = 256, window = 10, min_count = 0, seed = 777, workers = 32, iter = 10000)
-model.save("../data/word2vec.model")
+# sentences = word2vec.LineSentence("../data/comment.txt")
+# model = word2vec.Word2Vec(sentences, size = 256, window = 10, min_count = 0, seed = 777, workers = 32, iter = 10000)
+# model.save("../data/word2vec.model")
 # class gensim.models.word2vec.Word2Vec(sentences=None, size=100, 
 #                                       alpha=0.025, window=5, min_count=5, max_vocab_size=None, sample=0.001, 
 #                                       seed=1, workers=3, min_alpha=0.0001, sg=0, hs=0, negative=5, cbow_mean=1, 

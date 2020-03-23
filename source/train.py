@@ -9,15 +9,16 @@ device = torch.device(('cuda:' + args['gpu']) if torch.cuda.is_available() else 
 data = DATA(args['input_board'], args['input_comment'], args['embedding_file'], args['sentence_length'])
 data.to(device)
 data.cut_data(args['validation'], args['test'], args['batch_size'])
-encoder = Encoder(256, 1, args['batch_size'], device).to(device)
-decoder = Decoder(data.embedding_dim, data.num_word, args['batch_size'], 49, data.table_vector, args['sentence_length'], device).to(device)
+# encoder = Encoder(256, 1, args['batch_size'], device).to(device)
+encoder = Encoder(device).to(device)
+decoder = Decoder(data.embedding_dim, data.num_word, args['batch_size'], 1, data.table_vector, args['sentence_length'], device).to(device)
 optimzer = torch.optim.Adam(list(encoder.parameters()) + list(decoder.parameters()), lr = args['learning_rate'])
 loss_func = torch.nn.CrossEntropyLoss(ignore_index = -1)
 
 
-if args['weight'] and os.path.isfile('e' + args['weight']) and os.path.isfile('d' + args['weight']):
-	encoder.load_state_dict(torch.load('e' + args['weight']))
-	decoder.load_state_dict(torch.load('d' + args['weight']))
+# if args['weight'] and os.path.isfile('e' + args['weight']) and os.path.isfile('d' + args['weight']):
+# 	encoder.load_state_dict(torch.load('e' + args['weight']))
+# 	decoder.load_state_dict(torch.load('d' + args['weight']))
 
 print('Start Training : \n')
 
@@ -36,6 +37,7 @@ for num in range(0, len(dataset), args['batch_size']) :
 	if num == 0 :
 		for prob in result[0] :
 			index = torch.argmax(prob)
+			print(' ', index.item(), ' ', end = '')
 			print(data.table_word[index], end = '')
 		print('')
 last_loss /= len(dataset) / args['batch_size']
@@ -53,12 +55,13 @@ for epoch in range(args['epoch']) :
 	print('#' + str(epoch) + ' Training Loss :', loss.to(torch.device('cpu')).item())
 	encoder.zero_grad()
 	decoder.zero_grad()
-	loss.backward()
-	optimzer.step()
-
-	del loss
 	del hidden
 	del result
+	loss.backward()
+	del loss
+	optimzer.step()
+
+	
 
 
 	loss = 0.0
@@ -75,25 +78,25 @@ for epoch in range(args['epoch']) :
 		if num == 0 :
 			for prob in result[0] :
 				index = torch.argmax(prob)
+				print(' ', index.item(), ' ', end = '')
 				print(data.table_word[index], end = '')
 			print('')
 	loss /= len(dataset)/args['batch_size']
 	print('#' + str(epoch) + ' Validation Loss :', loss)
 
-	if loss < last_loss :
-		last_loss = loss
-		torch.save(encoder.state_dict(), 'etmp.bin')
-		torch.save(decoder.state_dict(), 'dtmp.bin')
-		update = 1
-		print('Update successfully.\n')
-	elif update :
-		update = 0
-		encoder.load_state_dict(torch.load('etmp.bin'))
-		decoder.load_state_dict(torch.load('dtmp.bin'))
-		print('Restore.\n')
-	else :
-		print('Again.\n')
+	# if loss < last_loss :
+	# 	last_loss = loss
+	# 	torch.save(encoder.state_dict(), 'etmp.bin')
+	# 	torch.save(decoder.state_dict(), 'dtmp.bin')
+	# 	update = 1
+	# 	print('Update successfully.\n')
+	# elif update :
+	# 	update = 0
+	# 	encoder.load_state_dict(torch.load('etmp.bin'))
+	# 	decoder.load_state_dict(torch.load('dtmp.bin'))
+	# 	print('Restore.\n')
+	# else :
+	# 	print('Again.\n')
 
-if args['weight'] :
-	encoder.load_state_dict(torch.load('e' + args['weight']))
-	decoder.load_state_dict(torch.load('d' + args['weight']))
+	torch.save(encoder.state_dict(), 'etmp.bin')
+	torch.save(decoder.state_dict(), 'dtmp.bin')

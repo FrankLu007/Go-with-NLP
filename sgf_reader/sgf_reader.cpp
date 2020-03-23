@@ -265,54 +265,54 @@ public:
 					std::fprintf(fp, "\n");
 				}
 
-				// 1~8+ liberty & capture size
-				get_board(step <= 1 ? 0 : step - 1, game);
-				for(move_t pos = 0 ; pos < 361 ; pos++)
-					if(board[pos])
-					{
-						get_group(pos, group, & life);
-						if((board[pos] & 1) == (step & 1)) def[life.size() >= N ? N : life.size()].insert(group.begin(), group.end());
-						else att[life.size() >= N ? N : life.size()].insert(life.begin(), life.end());
-					}
-				for(move_t i = 1 ; i <= N ; i++) {for(auto pos : def[i]) std::fprintf(fp, "%u ", pos); std::fprintf(fp, "\n");}
-				for(move_t i = 1 ; i <= N ; i++) {for(auto pos : att[i]) std::fprintf(fp, "%u ", pos); std::fprintf(fp, "\n");}
-				for(move_t i = 1 ; i <= N ; i++) {def[i].clear(); att[i].clear();}
+				// // 1~8+ liberty & capture size
+				// get_board(step <= 1 ? 0 : step - 1, game);
+				// for(move_t pos = 0 ; pos < 361 ; pos++)
+				// 	if(board[pos])
+				// 	{
+				// 		get_group(pos, group, & life);
+				// 		if((board[pos] & 1) == (step & 1)) def[life.size() >= N ? N : life.size()].insert(group.begin(), group.end());
+				// 		else att[life.size() >= N ? N : life.size()].insert(life.begin(), life.end());
+				// 	}
+				// for(move_t i = 1 ; i <= N ; i++) {for(auto pos : def[i]) std::fprintf(fp, "%u ", pos); std::fprintf(fp, "\n");}
+				// for(move_t i = 1 ; i <= N ; i++) {for(auto pos : att[i]) std::fprintf(fp, "%u ", pos); std::fprintf(fp, "\n");}
+				// for(move_t i = 1 ; i <= N ; i++) {def[i].clear(); att[i].clear();}
 
-				// self-Atari size
-				for(move_t pos = 0 ; pos < 361 ; pos++)
-					if((board[pos] & 1) == (step & 1))
-					{
-						get_board(step <= 1 ? 0 : step - 1, game);
-						if(get_group(pos, group, & life, 2))
-						{
-							move_t a = * life.begin(), b = * (life.begin() ++);
-							board[a] = step;
-							if(get_group(pos, group, & life, 1)) 
-								att[group.size() >= N ? N : group.size()].insert(a);
-							board[a] = 0;
-							board[b] = step;
-							if(get_group(pos, group, & life, 1)) 
-								att[group.size() >= N ? N : group.size()].insert(b);
-							board[b] = 0;
-						}
-					}
-				for(move_t i = 1 ; i <= N ; i++) {for(auto pos : att[i]) std::fprintf(fp, "%u ", pos); std::fprintf(fp, "\n");}
+				// // self-Atari size
+				// for(move_t pos = 0 ; pos < 361 ; pos++)
+				// 	if((board[pos] & 1) == (step & 1))
+				// 	{
+				// 		get_board(step <= 1 ? 0 : step - 1, game);
+				// 		if(get_group(pos, group, & life, 2))
+				// 		{
+				// 			move_t a = * life.begin(), b = * (life.begin() ++);
+				// 			board[a] = step;
+				// 			if(get_group(pos, group, & life, 1)) 
+				// 				att[group.size() >= N ? N : group.size()].insert(a);
+				// 			board[a] = 0;
+				// 			board[b] = step;
+				// 			if(get_group(pos, group, & life, 1)) 
+				// 				att[group.size() >= N ? N : group.size()].insert(b);
+				// 			board[b] = 0;
+				// 		}
+				// 	}
+				// for(move_t i = 1 ; i <= N ; i++) {for(auto pos : att[i]) std::fprintf(fp, "%u ", pos); std::fprintf(fp, "\n");}
 
 
-				// liberty after move
-				get_board(step, game);
-				for(move_t pos = 0 ; pos < 361 ; pos++)
-				{
-					if(board[pos] && (board[pos] & 1) == (step & 1))
-					{
-						get_group(pos, group, & life);
-						def[life.size() >= N ? N : life.size()].insert(group.begin(), group.end());
-					}
-				}
-				for(move_t i = 1 ; i <= N ; i++) {for(auto pos : def[i]) std::fprintf(fp, "%u ", pos); std::fprintf(fp, "\n");}
+				// // liberty after move
+				// get_board(step, game);
+				// for(move_t pos = 0 ; pos < 361 ; pos++)
+				// {
+				// 	if(board[pos] && (board[pos] & 1) == (step & 1))
+				// 	{
+				// 		get_group(pos, group, & life);
+				// 		def[life.size() >= N ? N : life.size()].insert(group.begin(), group.end());
+				// 	}
+				// }
+				// for(move_t i = 1 ; i <= N ; i++) {for(auto pos : def[i]) std::fprintf(fp, "%u ", pos); std::fprintf(fp, "\n");}
 
-				// turn color
-				std::fprintf(fp, "%d\n", step & 1);
+				// // turn color
+				// std::fprintf(fp, "%d\n", step & 1);
 
 				// comment
 				std::fprintf(fp, "%s\n", comment.c_str());

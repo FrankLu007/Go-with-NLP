@@ -2,9 +2,10 @@ import sys
 
 args = {'gpu' : '0', 'epoch' : 1000, 'learning_rate' : 0.0001, 'batch_size' : 32,\
 		'test' : 0.1, 'validation' : 0.1, 'input_board' : '../data/board.txt', 'input_comment' : '../data/comment.txt',\
-		'embedding_file' : '../data/embedding_256D.txt', 'sentence_length' : 2010, 'weight' : None}
+		'embedding_file' : '../data/embedding_256D.txt', 'sentence_length' : 2010, 'load_weight' : None, 'save_weight' : None,\
+		'thread' : 1, 'record' : None}
 float_args = ['learning_rate', 'test', 'validation']
-str_args = ['input_board', 'input_comment', 'embedding_file', 'gpu', 'weight']
+str_args = ['input_board', 'input_comment', 'embedding_file', 'gpu', 'load_weight', 'save_weight', 'record']
 args_parse = 0 # 1 if args have been parsed
 
 def error_message(info) :
@@ -19,6 +20,7 @@ def print_args() :
 		print('\nArgument :')
 		for arg in args :
 			print('%-20s    '%arg, args[arg])
+		print('')
 	
 def get_args() :
 	global args_parse
