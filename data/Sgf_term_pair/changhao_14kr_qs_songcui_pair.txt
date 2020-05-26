@@ -1,0 +1,1 @@
+49 斷 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qd];W[dc];B[de];W[ce];B[dd];W[cd];B[ec];W[df];B[cc];W[db];B[bc];W[eb];B[fd];W[fc];B[cf];W[ed];B[ee];W[fe];B[ef];W[gd];B[dg];W[pp];B[co];W[oc];B[pe];W[ep];B[dq];W[eq];B[dr];W[jq];B[qn];W[np];B[nd];W[qo];B[pn];W[pj];B[nc];W[mm];B[pl];W[nj];B[qj];W[qi];B[rj];W[pi];B[ri];W[dn];B[do];W[eo];B[en])

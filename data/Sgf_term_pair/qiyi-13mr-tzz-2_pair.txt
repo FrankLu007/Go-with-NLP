@@ -1,0 +1,4 @@
+1 小目 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qd])
+3 提 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qd];W[od];B[pp])
+41 長 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qd];W[od];B[pp];W[dc];B[dp];W[cn];B[fq];W[di];B[jc];W[gp];B[fp];W[gn];B[em];W[kp];B[mp];W[cp];B[cq];W[do];B[bp];W[fo];B[co];W[dn];B[bn];W[cl];B[gd];W[de];B[mc];W[pf];B[oc];W[nd];B[nc];W[pd];B[pc];W[qe];B[rd];W[gf];B[pj];W[ie];B[cc];W[cd];B[mj])
+81 叫吃 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qd];W[od];B[pp];W[dc];B[dp];W[cn];B[fq];W[di];B[jc];W[gp];B[fp];W[gn];B[em];W[kp];B[mp];W[cp];B[cq];W[do];B[bp];W[fo];B[co];W[dn];B[bn];W[cl];B[gd];W[de];B[mc];W[pf];B[oc];W[nd];B[nc];W[pd];B[pc];W[qe];B[rd];W[gf];B[pj];W[ie];B[cc];W[cd];B[mj];W[qp];B[qo];W[ro];B[po];W[qq];B[rn];W[or];B[db];W[ec];B[qg];W[oh];B[pi];W[kj];B[jf];W[kh];B[if];W[hf];B[lf];W[ni];B[ih];W[nj];B[hg];W[gg];B[gh];W[fh];B[gi];W[fi];B[gj];W[eb];B[rp];W[rq];B[so];W[np];B[no];W[nq];B[nk];W[mk];B[nl];W[mo];B[lk])

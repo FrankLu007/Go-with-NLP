@@ -1,0 +1,4 @@
+16 並 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qd];W[dd];B[fc];W[cf];B[pq];W[dp];B[kc];W[qk];B[qn];W[qh];B[qf];W[oh];B[fe];W[ec];B[fb];W[nd])
+28 夾 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qd];W[dd];B[fc];W[cf];B[pq];W[dp];B[kc];W[qk];B[qn];W[qh];B[qf];W[oh];B[fe];W[ec];B[fb];W[nd];B[pc];W[pe];B[ke];W[qe];B[re];W[rd];B[rc];W[rf];B[sd];W[pf];B[fq];W[hq])
+32 擋 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qd];W[dd];B[fc];W[cf];B[pq];W[dp];B[kc];W[qk];B[qn];W[qh];B[qf];W[oh];B[fe];W[ec];B[fb];W[nd];B[pc];W[pe];B[ke];W[qe];B[re];W[rd];B[rc];W[rf];B[sd];W[pf];B[fq];W[hq];B[cn];W[fp];B[cq];W[cp])
+38 扳 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qd];W[dd];B[fc];W[cf];B[pq];W[dp];B[kc];W[qk];B[qn];W[qh];B[qf];W[oh];B[fe];W[ec];B[fb];W[nd];B[pc];W[pe];B[ke];W[qe];B[re];W[rd];B[rc];W[rf];B[sd];W[pf];B[fq];W[hq];B[cn];W[fp];B[cq];W[cp];B[dq];W[ep];B[fr];W[bp];B[bq];W[gp])
