@@ -4,6 +4,7 @@
 24 長 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qd];W[dc];B[pq];W[oc];B[cp];W[po];B[qo];W[pp];B[qp];W[oq];B[qn];W[pe];B[qe];W[pf];B[qg];W[pg];B[qh];W[ph];B[pi];W[pn];B[qq];W[oi];B[oj];W[ni])
 28 拐 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qd];W[dc];B[pq];W[oc];B[cp];W[po];B[qo];W[pp];B[qp];W[oq];B[qn];W[pe];B[qe];W[pf];B[qg];W[pg];B[qh];W[ph];B[pi];W[pn];B[qq];W[oi];B[oj];W[ni];B[pj];W[pm];B[nj];W[qm])
 30 碰 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qd];W[dc];B[pq];W[oc];B[cp];W[po];B[qo];W[pp];B[qp];W[oq];B[qn];W[pe];B[qe];W[pf];B[qg];W[pg];B[qh];W[ph];B[pi];W[pn];B[qq];W[oi];B[oj];W[ni];B[pj];W[pm];B[nj];W[qm];B[or];W[nq])
+29 扳 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qd];W[dc];B[pq];W[oc];B[cp];W[po];B[qo];W[pp];B[qp];W[oq];B[qn];W[pe];B[qe];W[pf];B[qg];W[pg];B[qh];W[ph];B[pi];W[pn];B[qq];W[oi];B[oj];W[ni];B[pj];W[pm];B[nj];W[qm];B[or])
 33 扳 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qd];W[dc];B[pq];W[oc];B[cp];W[po];B[qo];W[pp];B[qp];W[oq];B[qn];W[pe];B[qe];W[pf];B[qg];W[pg];B[qh];W[ph];B[pi];W[pn];B[qq];W[oi];B[oj];W[ni];B[pj];W[pm];B[nj];W[qm];B[or];W[nq];B[nr];W[mq];B[mi])
 34 覷 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qd];W[dc];B[pq];W[oc];B[cp];W[po];B[qo];W[pp];B[qp];W[oq];B[qn];W[pe];B[qe];W[pf];B[qg];W[pg];B[qh];W[ph];B[pi];W[pn];B[qq];W[oi];B[oj];W[ni];B[pj];W[pm];B[nj];W[qm];B[or];W[nq];B[nr];W[mq];B[mi];W[ng])
 35 覷 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qd];W[dc];B[pq];W[oc];B[cp];W[po];B[qo];W[pp];B[qp];W[oq];B[qn];W[pe];B[qe];W[pf];B[qg];W[pg];B[qh];W[ph];B[pi];W[pn];B[qq];W[oi];B[oj];W[ni];B[pj];W[pm];B[nj];W[qm];B[or];W[nq];B[nr];W[mq];B[mi];W[ng];B[no])

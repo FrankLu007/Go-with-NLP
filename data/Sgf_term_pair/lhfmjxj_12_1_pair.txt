@@ -2,6 +2,8 @@
 3 小目 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[pd];W[dc];B[dq])
 6 尖 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[pd];W[dc];B[dq];W[qp];B[ce];W[ed])
 17 斷 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[pd];W[dc];B[dq];W[qp];B[ce];W[ed];B[oq];W[co];B[dm];W[en];B[fp];W[cq];B[dp];W[cp];B[dn];W[do];B[eo])
+9 一間高夾 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[pd];W[dc];B[dq];W[qp];B[ce];W[ed];B[oq];W[co];B[dm])
+15 斷 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[pd];W[dc];B[dq];W[qp];B[ce];W[ed];B[oq];W[co];B[dm];W[en];B[fp];W[cq];B[dp];W[cp];B[dn])
 18 斷 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[pd];W[dc];B[dq];W[qp];B[ce];W[ed];B[oq];W[co];B[dm];W[en];B[fp];W[cq];B[dp];W[cp];B[dn];W[do];B[eo];W[fn])
 26 雙 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[pd];W[dc];B[dq];W[qp];B[ce];W[ed];B[oq];W[co];B[dm];W[en];B[fp];W[cq];B[dp];W[cp];B[dn];W[do];B[eo];W[fn];B[bn];W[cn];B[cm];W[bo];B[hp];W[df];B[fl];W[cf])
 29 碰 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[pd];W[dc];B[dq];W[qp];B[ce];W[ed];B[oq];W[co];B[dm];W[en];B[fp];W[cq];B[dp];W[cp];B[dn];W[do];B[eo];W[fn];B[bn];W[cn];B[cm];W[bo];B[hp];W[df];B[fl];W[cf];B[po];W[qo];B[pn])

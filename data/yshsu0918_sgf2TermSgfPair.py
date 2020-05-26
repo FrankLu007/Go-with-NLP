@@ -33,11 +33,14 @@ class CommentTool():
         return None
 
     def parse_comment(self, comment ):
+        step_term_pairs = []
+
         for x in re.finditer('[0-9]+', comment):
             upcoming_str = look_for_upcoming_str( x.span()[1], comment)
             term = self.Is_term_in_str(upcoming_str)
             if term != None:
-                return x.group(0), term
+                step_term_pairs.append( [x.group(0), term])
+        return step_term_pairs
 
 
 def look_for_upcoming_str(begin_idx, comment, interval= 10):
@@ -86,19 +89,24 @@ def parse_gametree(gt):
     return sgf,comments
 
 
+def test_parse():
+    c ='對白8的二間高夾,黑9尖,黑11飛,是最普通的應手.白12一般是在左邊展開.現在,白12選擇夾,而且是選擇最激烈的一間高夾,是白棋的作戰方針'
+    print(CT.parse_comment( c ))
+
+
+
 CT = CommentTool()
 def parse_all_comments(comments):
     pair = dict()
     for c in comments:
-        Q = CT.parse_comment( c )
-        if Q != None:
-            stepnum = Q[0]
-            term = Q[1]
+        for step_term_pair in CT.parse_comment( c ):
+            stepnum = step_term_pair[0]
+            term = step_term_pair[1]
             pair[stepnum] = term
     return pair
 
 if __name__ == '__main__':
-    
+    #test_parse()
     SgfPath = './Cleansgf'
     output_path = './Sgf_term_pair'
     if not os.path.isdir(output_path):

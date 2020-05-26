@@ -1,4 +1,5 @@
 12 大飛 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[pe];W[qp];B[do];W[cd];B[pc];W[dq];B[fp];W[fc];B[er];W[bo];B[cp];W[cl])
+10 象飛 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[pe];W[qp];B[do];W[cd];B[pc];W[dq];B[fp];W[fc];B[er];W[bo])
 35 拐 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[pe];W[qp];B[do];W[cd];B[pc];W[dq];B[fp];W[fc];B[er];W[bo];B[cp];W[cl];B[oq];W[lp];B[on];W[qm];B[jp];W[op];B[np];W[no];B[pp];W[oo];B[po];W[pq];B[qq];W[pr];B[qo];W[nq];B[pm];W[pl];B[ol];W[pk];B[qi];W[rj];B[ok])
 44 尖 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[pe];W[qp];B[do];W[cd];B[pc];W[dq];B[fp];W[fc];B[er];W[bo];B[cp];W[cl];B[oq];W[lp];B[on];W[qm];B[jp];W[op];B[np];W[no];B[pp];W[oo];B[po];W[pq];B[qq];W[pr];B[qo];W[nq];B[pm];W[pl];B[ol];W[pk];B[qi];W[rj];B[ok];W[kc];B[qj];W[rk];B[cj];W[bp];B[cq];W[ch];B[dn];W[dm])
 48 擋 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[pe];W[qp];B[do];W[cd];B[pc];W[dq];B[fp];W[fc];B[er];W[bo];B[cp];W[cl];B[oq];W[lp];B[on];W[qm];B[jp];W[op];B[np];W[no];B[pp];W[oo];B[po];W[pq];B[qq];W[pr];B[qo];W[nq];B[pm];W[pl];B[ol];W[pk];B[qi];W[rj];B[ok];W[kc];B[qj];W[rk];B[cj];W[bp];B[cq];W[ch];B[dn];W[dm];B[dk];W[dl];B[fk];W[bq])

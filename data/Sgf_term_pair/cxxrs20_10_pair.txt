@@ -1,5 +1,6 @@
 5 並 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qe];W[pp];B[dq];W[cd];B[ec])
 1 目外 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qe])
+7 夾 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qe];W[pp];B[dq];W[cd];B[ec];W[pc];B[nc])
 13 大飛 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qe];W[pp];B[dq];W[cd];B[ec];W[pc];B[nc];W[od];B[nd];W[of];B[pg];W[id];B[ke])
 25 並 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qe];W[pp];B[dq];W[cd];B[ec];W[pc];B[nc];W[od];B[nd];W[of];B[pg];W[id];B[ke];W[if];B[og];W[ne];B[kc];W[ng];B[nh];W[mg];B[kg];W[mh];B[ni];W[pi];B[ki])
 31 拐 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qe];W[pp];B[dq];W[cd];B[ec];W[pc];B[nc];W[od];B[nd];W[of];B[pg];W[id];B[ke];W[if];B[og];W[ne];B[kc];W[ng];B[nh];W[mg];B[kg];W[mh];B[ni];W[pi];B[ki];W[mi];B[nj];W[mj];B[nk];W[pk];B[mk])

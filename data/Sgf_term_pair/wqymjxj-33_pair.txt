@@ -2,6 +2,7 @@
 23 扳 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qd];W[cd];B[pq];W[nd];B[oc];W[nc];B[od];W[ne];B[cp];W[qo];B[ep];W[fc];B[cj];W[np];B[nq];W[op];B[oq];W[mp];B[lq];W[ph];B[lp];W[lo];B[ko])
 25 退 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qd];W[cd];B[pq];W[nd];B[oc];W[nc];B[od];W[ne];B[cp];W[qo];B[ep];W[fc];B[cj];W[np];B[nq];W[op];B[oq];W[mp];B[lq];W[ph];B[lp];W[lo];B[ko];W[kn];B[jo])
 27 長 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qd];W[cd];B[pq];W[nd];B[oc];W[nc];B[od];W[ne];B[cp];W[qo];B[ep];W[fc];B[cj];W[np];B[nq];W[op];B[oq];W[mp];B[lq];W[ph];B[lp];W[lo];B[ko];W[kn];B[jo];W[jn];B[io])
+28 斷 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qd];W[cd];B[pq];W[nd];B[oc];W[nc];B[od];W[ne];B[cp];W[qo];B[ep];W[fc];B[cj];W[np];B[nq];W[op];B[oq];W[mp];B[lq];W[ph];B[lp];W[lo];B[ko];W[kn];B[jo];W[jn];B[io];W[ln])
 31 擋 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qd];W[cd];B[pq];W[nd];B[oc];W[nc];B[od];W[ne];B[cp];W[qo];B[ep];W[fc];B[cj];W[np];B[nq];W[op];B[oq];W[mp];B[lq];W[ph];B[lp];W[lo];B[ko];W[kn];B[jo];W[jn];B[io];W[ln];B[in];W[dq];B[cq])
 36 長 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qd];W[cd];B[pq];W[nd];B[oc];W[nc];B[od];W[ne];B[cp];W[qo];B[ep];W[fc];B[cj];W[np];B[nq];W[op];B[oq];W[mp];B[lq];W[ph];B[lp];W[lo];B[ko];W[kn];B[jo];W[jn];B[io];W[ln];B[in];W[dq];B[cq];W[eq];B[dp];W[gq];B[hr];W[fp])
 40 扳 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qd];W[cd];B[pq];W[nd];B[oc];W[nc];B[od];W[ne];B[cp];W[qo];B[ep];W[fc];B[cj];W[np];B[nq];W[op];B[oq];W[mp];B[lq];W[ph];B[lp];W[lo];B[ko];W[kn];B[jo];W[jn];B[io];W[ln];B[in];W[dq];B[cq];W[eq];B[dp];W[gq];B[hr];W[fp];B[fo];W[go];B[gn];W[cr])

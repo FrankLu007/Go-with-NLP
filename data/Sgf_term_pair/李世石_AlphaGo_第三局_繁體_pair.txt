@@ -3,6 +3,6 @@
 13 尖 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[dp];W[dd];B[qp];W[pd];B[qf];W[nc];B[kp];W[cn];B[fq];W[cg];B[pj];W[op];B[pq])
 15 斷 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[dp];W[dd];B[qp];W[pd];B[qf];W[nc];B[kp];W[cn];B[fq];W[cg];B[pj];W[op];B[pq];W[om];B[on])
 16 穿象眼 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[dp];W[dd];B[qp];W[pd];B[qf];W[nc];B[kp];W[cn];B[fq];W[cg];B[pj];W[op];B[pq];W[om];B[on];W[po])
-18 擋 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[dp];W[dd];B[qp];W[pd];B[qf];W[nc];B[kp];W[cn];B[fq];W[cg];B[pj];W[op];B[pq];W[om];B[on];W[po];B[pn];W[qo])
+18 衝 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[dp];W[dd];B[qp];W[pd];B[qf];W[nc];B[kp];W[cn];B[fq];W[cg];B[pj];W[op];B[pq];W[om];B[on];W[po];B[pn];W[qo])
 26 擋 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[dp];W[dd];B[qp];W[pd];B[qf];W[nc];B[kp];W[cn];B[fq];W[cg];B[pj];W[op];B[pq];W[om];B[on];W[po];B[pn];W[qo];B[oq];W[np];B[nn];W[nq];B[rp];W[lo];B[ko];W[lp])
 33 拐 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[dp];W[dd];B[qp];W[pd];B[qf];W[nc];B[kp];W[cn];B[fq];W[cg];B[pj];W[op];B[pq];W[om];B[on];W[po];B[pn];W[qo];B[oq];W[np];B[nn];W[nq];B[rp];W[lo];B[ko];W[lp];B[kq];W[lm];B[kn];W[mm];B[jl];W[qk];B[pm])

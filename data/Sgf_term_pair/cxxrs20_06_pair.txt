@@ -1,5 +1,6 @@
 1 目外 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qe])
 9 衝 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qe];W[qp];B[dq];W[dd];B[co];W[pc];B[oq];W[lp];B[mo])
+11 挖 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qe];W[qp];B[dq];W[dd];B[co];W[pc];B[oq];W[lp];B[mo];W[op];B[pp])
 38 扳 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qe];W[qp];B[dq];W[dd];B[co];W[pc];B[oq];W[lp];B[mo];W[op];B[pp];W[po];B[pq];W[np];B[qo];W[qq];B[qr];W[rr];B[ro];W[pr];B[or];W[qs];B[mp];W[nq];B[pn];W[oo];B[mq];W[nr];B[md];W[pe];B[pf];W[oe];B[qd];W[qc];B[nc];W[oc];B[mf];W[mg])
 44 夾 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qe];W[qp];B[dq];W[dd];B[co];W[pc];B[oq];W[lp];B[mo];W[op];B[pp];W[po];B[pq];W[np];B[qo];W[qq];B[qr];W[rr];B[ro];W[pr];B[or];W[qs];B[mp];W[nq];B[pn];W[oo];B[mq];W[nr];B[md];W[pe];B[pf];W[oe];B[qd];W[qc];B[nc];W[oc];B[mf];W[mg];B[lf];W[nf];B[qh];W[nh];B[fc];W[id])
 67 夾 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qe];W[qp];B[dq];W[dd];B[co];W[pc];B[oq];W[lp];B[mo];W[op];B[pp];W[po];B[pq];W[np];B[qo];W[qq];B[qr];W[rr];B[ro];W[pr];B[or];W[qs];B[mp];W[nq];B[pn];W[oo];B[mq];W[nr];B[md];W[pe];B[pf];W[oe];B[qd];W[qc];B[nc];W[oc];B[mf];W[mg];B[lf];W[nf];B[qh];W[nh];B[fc];W[id];B[ee];W[cf];B[if];W[lc];B[ld];W[nb];B[mb];W[mc];B[kc];W[lb];B[kb];W[nd];B[db];W[gd];B[lg];W[hf];B[cc];W[ig];B[jf];W[hg];B[ff];W[gc];B[ch])

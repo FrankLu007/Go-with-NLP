@@ -1,6 +1,9 @@
 318 提 None
 15 尖頂 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[jj];W[dp];B[pd];W[de];B[pp];W[dc];B[pj];W[nq];B[jd];W[qq];B[qp];W[pq];B[no];W[qf];B[qe])
 26 扳 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[jj];W[dp];B[pd];W[de];B[pp];W[dc];B[pj];W[nq];B[jd];W[qq];B[qp];W[pq];B[no];W[qf];B[qe];W[pf];B[nd];W[ql];B[qj];W[op];B[oo];W[po];B[qo];W[pn];B[rm];W[rj])
+27 退 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[jj];W[dp];B[pd];W[de];B[pp];W[dc];B[pj];W[nq];B[jd];W[qq];B[qp];W[pq];B[no];W[qf];B[qe];W[pf];B[nd];W[ql];B[qj];W[op];B[oo];W[po];B[qo];W[pn];B[rm];W[rj];B[rl])
+18 斷 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[jj];W[dp];B[pd];W[de];B[pp];W[dc];B[pj];W[nq];B[jd];W[qq];B[qp];W[pq];B[no];W[qf];B[qe];W[pf];B[nd];W[ql])
+25 退 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[jj];W[dp];B[pd];W[de];B[pp];W[dc];B[pj];W[nq];B[jd];W[qq];B[qp];W[pq];B[no];W[qf];B[qe];W[pf];B[nd];W[ql];B[qj];W[op];B[oo];W[po];B[qo];W[pn];B[rm])
 38 扳 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[jj];W[dp];B[pd];W[de];B[pp];W[dc];B[pj];W[nq];B[jd];W[qq];B[qp];W[pq];B[no];W[qf];B[qe];W[pf];B[nd];W[ql];B[qj];W[op];B[oo];W[po];B[qo];W[pn];B[rm];W[rj];B[rl];W[rk];B[qk];W[qi];B[pi];W[qh];B[rq];W[rr];B[pl];W[re];B[rd];W[rf])
 40 雙 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[jj];W[dp];B[pd];W[de];B[pp];W[dc];B[pj];W[nq];B[jd];W[qq];B[qp];W[pq];B[no];W[qf];B[qe];W[pf];B[nd];W[ql];B[qj];W[op];B[oo];W[po];B[qo];W[pn];B[rm];W[rj];B[rl];W[rk];B[qk];W[qi];B[pi];W[qh];B[rq];W[rr];B[pl];W[re];B[rd];W[rf];B[fq];W[lp])
 41 雙飛燕 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[jj];W[dp];B[pd];W[de];B[pp];W[dc];B[pj];W[nq];B[jd];W[qq];B[qp];W[pq];B[no];W[qf];B[qe];W[pf];B[nd];W[ql];B[qj];W[op];B[oo];W[po];B[qo];W[pn];B[rm];W[rj];B[rl];W[rk];B[qk];W[qi];B[pi];W[qh];B[rq];W[rr];B[pl];W[re];B[rd];W[rf];B[fq];W[lp];B[cn])

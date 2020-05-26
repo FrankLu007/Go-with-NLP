@@ -1,5 +1,6 @@
 8 雙 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[cp];W[pp];B[eq];W[cd];B[pd];W[ec];B[cj];W[qj])
 26 扳 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[cp];W[pp];B[eq];W[cd];B[pd];W[ec];B[cj];W[qj];B[nq];W[pn];B[kq];W[nc];B[oc];W[nd];B[qf];W[ch];B[ej];W[jc];B[eh];W[qc];B[nb];W[re];B[qe];W[rf];B[mc];W[qg])
+27 擋 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[cp];W[pp];B[eq];W[cd];B[pd];W[ec];B[cj];W[qj];B[nq];W[pn];B[kq];W[nc];B[oc];W[nd];B[qf];W[ch];B[ej];W[jc];B[eh];W[qc];B[nb];W[re];B[qe];W[rf];B[mc];W[qg];B[rd])
 28 斷 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[cp];W[pp];B[eq];W[cd];B[pd];W[ec];B[cj];W[qj];B[nq];W[pn];B[kq];W[nc];B[oc];W[nd];B[qf];W[ch];B[ej];W[jc];B[eh];W[qc];B[nb];W[re];B[qe];W[rf];B[mc];W[qg];B[rd];W[qd])
 60 提 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[cp];W[pp];B[eq];W[cd];B[pd];W[ec];B[cj];W[qj];B[nq];W[pn];B[kq];W[nc];B[oc];W[nd];B[qf];W[ch];B[ej];W[jc];B[eh];W[qc];B[nb];W[re];B[qe];W[rf];B[mc];W[qg];B[rd];W[qd];B[rc];W[qb];B[pg];W[qh];B[ne];W[md];B[od];W[mb];B[ob];W[rb];B[lc];W[me];B[ld];W[mf];B[of];W[ke];B[lb];W[jp];B[jq];W[ip];B[pr];W[iq];B[lo];W[jn];B[fn];W[mp];B[mq];W[bp];B[co];W[cq];B[cr];W[cl])
 19 扳 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[cp];W[pp];B[eq];W[cd];B[pd];W[ec];B[cj];W[qj];B[nq];W[pn];B[kq];W[nc];B[oc];W[nd];B[qf];W[ch];B[ej];W[jc];B[eh])

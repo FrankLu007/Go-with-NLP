@@ -2,6 +2,7 @@
 15 小飛 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qd];W[cq];B[pq];W[od];B[oc];W[nc];B[pc];W[md];B[ne];W[nd];B[pf];W[dd];B[jd];W[hc];B[lf])
 16 斷 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qd];W[cq];B[pq];W[od];B[oc];W[nc];B[pc];W[md];B[ne];W[nd];B[pf];W[dd];B[jd];W[hc];B[lf];W[mf])
 17 扳 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qd];W[cq];B[pq];W[od];B[oc];W[nc];B[pc];W[md];B[ne];W[nd];B[pf];W[dd];B[jd];W[hc];B[lf];W[mf];B[mg])
+18 穿象眼 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qd];W[cq];B[pq];W[od];B[oc];W[nc];B[pc];W[md];B[ne];W[nd];B[pf];W[dd];B[jd];W[hc];B[lf];W[mf];B[mg];W[ke])
 19 衝 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qd];W[cq];B[pq];W[od];B[oc];W[nc];B[pc];W[md];B[ne];W[nd];B[pf];W[dd];B[jd];W[hc];B[lf];W[mf];B[mg];W[ke];B[nf])
 22 斷 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qd];W[cq];B[pq];W[od];B[oc];W[nc];B[pc];W[md];B[ne];W[nd];B[pf];W[dd];B[jd];W[hc];B[lf];W[mf];B[mg];W[ke];B[nf];W[me];B[ng];W[lg])
 25 扭斷 (;CA[UTF-8]SZ[19]AP[MultiGo:3.6.0];B[qd];W[cq];B[pq];W[od];B[oc];W[nc];B[pc];W[md];B[ne];W[nd];B[pf];W[dd];B[jd];W[hc];B[lf];W[mf];B[mg];W[ke];B[nf];W[me];B[ng];W[lg];B[hd];W[gd];B[gc])
