@@ -7,6 +7,7 @@
   * change encode mode to UTF-8 (iconv)
   * convert simplified Chinese to traditional Chinese (opencc)
   * discard information about extra analysis
+  * remove meanless or short (len < 3) sentence
   * integrate the beginning style of the sentences
   * add the labels : \</s\>, \</end\>, \</step\>, \</step-N\>, \</color\>, \</rcolor\>
 ### Feature / Encoding
